@@ -90,6 +90,12 @@ socket.on('connection', (socket) => {
             socket.broadcast.emit('update', "update");
         }
     });
+    socket.on('isAlive', (message) => {
+        console.log(message);
+	    if (message == "hello") {
+        		socket.emit('isAlive', "olleh");
+	    }
+    });
     socket.on('sendSpots', (message) => {
         winston.info('sending spots to a player');
         socket.emit('sendSpots', spots.getSpotList());
