@@ -44,6 +44,7 @@ function verifIfTeamWin() {
         resetSpots();
         return "Green"
     }
+    winston.info('Neutral spot info');
     return "Neutral"
 }
 exports.verifIfTeamWin = verifIfTeamWin;
