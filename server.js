@@ -35,7 +35,6 @@ const db = low('db.json', {
  * Internal Module dependencies.
  */
 
-const teamHandler = require('./team');
 const spots = require('./spots');
 const question = require('./question');
 
@@ -46,24 +45,18 @@ const question = require('./question');
 dbUtil.newGame();
 
 /**
- * Express Route configuration
- */
-
-app.get('/', function (req, res, next) {
-    res.sendFile(__dirname + '/web/index.html');
-});
-
-/**
  * Socket.io configuration
  */
 
 socket.on('connection', (socket) => {
     winston.info('a user connected');
-    socket.on('isAlive', (message) => {
-        socket.emit('teamPlayer', teamName);
-        socket.broadcast.emit('update', "update");
+    socket.on('graphql', (message) => {
+        graphql(schema, message, root).then((response) => {
+             socket.emit('graphql', response);
+        });
     });
 });
+
 
 /**
  * Start listen with the server
