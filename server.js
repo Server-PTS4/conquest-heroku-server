@@ -37,6 +37,7 @@ const db = low('db.json', {
 
 const spots = require('./spots');
 const question = require('./question');
+const question = require('./team');
 
 /**
  * GameCreating
