@@ -24,10 +24,10 @@ const logger = new (winston.Logger)({
  * Data of graphql
  */
 const fields = {
-  hello: {
+  Alan: {
     type: GraphQLString,
     resolve: () => {
-      return 'Alan Turing'
+      return 'Turing'
     }
   }
 };
