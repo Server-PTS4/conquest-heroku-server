@@ -2,7 +2,7 @@
  * Created by lucas on 15/02/2017.
  */
 const {graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} = require('graphql');
-const app = require('express');
+const app = require('express')();
 const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
 const winston = require('winston');
