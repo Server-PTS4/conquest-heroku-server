@@ -62,7 +62,7 @@ socket.on('connection', (socket) => {
     });
 });
 
-function emition(var res) {
+function emition(res) {
     winston.info(res);
     socket.emit(res);
 }
