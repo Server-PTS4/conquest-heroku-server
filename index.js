@@ -60,7 +60,7 @@ socket.on('connection', (socket) => {
       result = graphql(schema, message)
         .then(res => winston.info(JSON.stringify(res, null, 2)))
         .catch(err => winston.info(err));
-        socket.emit(result);
+        socket.emit('isAlive', result);
       let resultat = "Result : ";
       resultat.concat(result);
       winston.info(resultat)
