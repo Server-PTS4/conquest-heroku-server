@@ -64,7 +64,7 @@ socket.on('connection', (socket) => {
 
 function emition(res) {
     winston.info(res);
-    socket.emit(res);
+    socket.emit('isAlive', res);
 }
 /**
  * Start listen with the server
