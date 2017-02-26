@@ -46,11 +46,20 @@ const schema = new GraphQLSchema({
 /**
  * Socket.io
  */
-socket.on('connection', (socket) => {
+/*socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
       socket.emit(graphql(schema, message)
         .then(res => winston.info(JSON.stringify(res, null, 2)))
         .catch(err => winston.info(err)));
+    });
+});*/
+
+socket.on('connection', (socket) => {
+    socket.on('isAlive', (message) => {
+      graphql(schema, message)
+        .then(res => winston.info(JSON.stringify(res, null, 2)))
+        .catch(err => winston.info(err));
+         socket.emit(res);
     });
 });
 
