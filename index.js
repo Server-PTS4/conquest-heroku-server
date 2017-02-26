@@ -58,11 +58,11 @@ socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
       const result = graphql(schema, message)
         .then(res => winston.info(JSON.stringify(res, null, 2)))
-        .catch(err => winston.info(err));
-      socket.emit('isAlive', result);
+        .catch(err => winston.info(err));      
       let resultat = "Result : ";
       resultat.concat(result);
       winston.info(resultat);
+      socket.emit('isAlive', result);
     });
 });
 
