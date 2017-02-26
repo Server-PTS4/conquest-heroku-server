@@ -56,14 +56,13 @@ const schema = new GraphQLSchema({
 
 socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
-      let result;
-      result = graphql(schema, message)
+      const result = graphql(schema, message)
         .then(res => winston.info(JSON.stringify(res, null, 2)))
         .catch(err => winston.info(err));
-      socket.emit('isAlive', 'result');
+      socket.emit('isAlive', result);
       let resultat = "Result : ";
       resultat.concat(result);
-      winston.info(resultat)
+      winston.info(resultat);
     });
 });
 
