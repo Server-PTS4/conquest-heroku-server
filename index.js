@@ -57,7 +57,7 @@ const schema = new GraphQLSchema({
 socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
       graphql(schema, message)
-        .then(res => winston.info(JSON.stringify(res, null, 2)), socket.emit(res))
+        .then(socket.emit(res => winston.info(JSON.stringify(res, null, 2))))
         .catch(err => winston.info(err));
     });
 });
