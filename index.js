@@ -2,6 +2,7 @@
  * Created by lucas on 15/02/2017.
  */
 const {graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} = require('graphql');
+var { buildSchema } = require('graphql');
 const app = require('express')();
 const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
@@ -21,27 +22,13 @@ const logger = new (winston.Logger)({
     ]
 });
 
-/**
- * Data of graphql
- */
-const fields = {
-  Alan: {
-    type: GraphQLString,
-    resolve: () => {
-      return 'Turing'
-    }
+var schema = buildSchema(`
+  type Query {
+    hello: String
   }
-};
+`);
 
-/**
- * Schemo for graphql
- */
-const schema = new GraphQLSchema({
-  query: new GraphQLObjectType({
-    name: 'RootQuery',
-    fields
-  })
-});
+var root = { hello: () => 'Hello world!' };
 
 /**
  * Socket.io
@@ -57,12 +44,12 @@ const schema = new GraphQLSchema({
 socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
         graphql(schema, message)
-            .then(res => emition(JSON.stringify(res, null, 2)))
+            .then(res => emit(JSON.stringify(res, null, 2)))
             .catch(err => winston.info(err));      
     });
 });
 
-function emition(res) {
+function emit(res) {
     winston.info(res);
     socket.emit('isAlive', res);
 }
