@@ -34,13 +34,16 @@ var root = { hello: () => 'Hello world!' };
  * Socket.io
  */
 socket.on('connection', (socket) => {
+    winston.info('A user connected');
     socket.on('isAlive', (message) => {
         graphql(schema, message, root)
-            .then((response) => {
-                emit(response);
-            })
+            .then((response) => { emit(response); })
             .catch(err => winston.info(err));                  
     });
+});
+
+socket.on('disconnection', (socket) => {
+    winston.info('A user disconnected');
 });
 
 function emit(res) {
