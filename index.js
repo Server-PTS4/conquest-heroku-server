@@ -42,7 +42,8 @@ socket.on('connection', (socket) => {
     });
 });
 
-socket.on('disconnection', (socket) => {
+socket.on('disconnection', (message) => {
+    winston.info(message);
     winston.info('A user disconnected');
 });
 
