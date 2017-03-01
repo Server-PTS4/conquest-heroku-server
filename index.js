@@ -25,6 +25,7 @@ const logger = new (winston.Logger)({
 var schema = buildSchema(`
   type Query {
     hello: String
+    
   }
 `);
 
@@ -36,6 +37,7 @@ var root = { hello: () => 'Hello world!' };
 socket.on('connection', (socket) => {
     winston.info('A user connected');
     
+    // TODO create a disconnection socket
     socket.on('disconnection', (socket) => {
         winston.info('A user disconnected');
     });
