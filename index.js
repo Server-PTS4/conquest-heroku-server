@@ -1,9 +1,8 @@
 /**
  * Created by lucas on 15/02/2017.
  */
-//const {graphql, GraphQLSchema, GraphQLObjectType, GraphQLString} = require('graphql');
-var { graphql, buildSchema } = require('graphql');
 
+var { graphql, buildSchema } = require('graphql');
 const app = require('express')();
 const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
@@ -34,23 +33,18 @@ var root = { hello: () => 'Hello world!' };
 /**
  * Socket.io
  */
-/*socket.on('connection', (socket) => {
-    socket.on('isAlive', (message) => {
-      socket.emit(graphql(schema, message)
-        .then(res => winston.info(JSON.stringify(res, null, 2)))
-        .catch(err => winston.info(err)));
-    });
-});*/
-
 socket.on('connection', (socket) => {
     socket.on('isAlive', (message) => {
         graphql(schema, message, root)
-            .then(res => emit(JSON.stringify(res, null, 2)))
-            .catch(err => winston.info(err));      
+            .then((response) => {
+                emit(response);
+            })
+            .catch(err => winston.info(err));                  
     });
 });
 
 function emit(res) {
+    res = JSON.stringify(res, null, 2);
     winston.info(res);
     socket.emit('isAlive', res);
 }
