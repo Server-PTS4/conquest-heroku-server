@@ -36,8 +36,7 @@ var root = { hello: () => 'Hello world!' };
 socket.on('connection', (socket) => {
     winston.info('A user connected');
     
-    socket.on('disconnection', (message) => {
-        winston.info(message);
+    socket.on('disconnection', (socket) => {
         winston.info('A user disconnected');
     });
     
