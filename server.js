@@ -38,6 +38,7 @@ const db = low('db.json', {
 const teamHandler = require('./team');
 const spots = require('./spots');
 const question = require('./question');
+const taloen = require('./taloen');
 
 /**
  * GameCreating
@@ -69,6 +70,12 @@ socket.on('connection', (socket) => {
         winston.info('broadcast update to client, cause : newPlayer');
         socket.broadcast.emit('update', "update");
     });
+
+    socket.on('getData', (message) => {
+        // Parse the message
+        socket.emit('getData', taloen.getData(message));
+    });
+
     socket.on('changePosition', (message) => {
         console.log(message);
         const player = JSON.parse(JSON.stringify(message));
