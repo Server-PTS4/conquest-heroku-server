@@ -1,11 +1,6 @@
 /**
- * Created by charles on 09/01/2017.
- */
-
-/**
  * External Module dependencies.
  */
-
 const app = require('express')();
 const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
@@ -24,32 +19,29 @@ const logger = new (winston.Logger)({
         })
     ]
 });
-const dbUtil = require('./db');
-// DataBase
+// Database
 const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
-const db = low('db.json', {
-    storage: fileSync
-})
+const db = low('db.json', { storage: fileSync });
+
 /**
  * Internal Module dependencies.
  */
-
 const teamHandler = require('./team');
 const spots = require('./spots');
 const question = require('./question');
+// Database
+const dbUtil = require('./db');
 const taloen = require('./taloen');
 
 /**
  * GameCreating
  */
-
 dbUtil.newGame();
 
 /**
  * Express Route configuration
  */
-
 app.get('/', function (req, res, next) {
     res.sendFile(__dirname + '/web/index.html');
 });
@@ -57,9 +49,16 @@ app.get('/', function (req, res, next) {
 /**
  * Socket.io configuration
  */
-
 socket.on('connection', (socket) => {
     winston.info('a user connected');
+
+    socket.on('isAlive', (message) => {
+        console.log(message);
+        if (message == "alan") {
+                socket.emit('isAlive', "turing");
+        }
+    });
+
     socket.on('newplayer', (message) => {
 		winston.info('Parsing message : ' + message);
         const player = JSON.parse(JSON.stringify(message));
@@ -71,9 +70,9 @@ socket.on('connection', (socket) => {
         socket.broadcast.emit('update', "update");
     });
 
-    socket.on('getData', (message) => {
-        // Parse the message
-        socket.emit('getData', taloen.getData(message));
+    socket.on('getData', (query) => {
+        // Parse the query
+        socket.emit('getData', taloen.getData(query));
     });
 
     socket.on('changePosition', (message) => {
@@ -98,12 +97,7 @@ socket.on('connection', (socket) => {
 	    socket.broadcast.emit('update', "update");
 	}
     });
-    socket.on('isAlive', (message) => {
-        console.log(message);
-	    if (message == "hello") {
-        		socket.emit('isAlive', "olleh");
-	    }
-    });
+    
     socket.on('sendSpots', (message) => {
         winston.info('sending spots to a player');
         socket.emit('sendSpots', spots.getSpotList());
@@ -128,5 +122,5 @@ socket.on('connection', (socket) => {
 /**
  * Start listen with the server
  */
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 server.listen(port, () => console.log('Express server listening on %d, in %s mode', port, app.get('env')));
