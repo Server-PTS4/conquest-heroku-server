@@ -1,28 +1,19 @@
 {
-  "teams": [
+  "teams": {
     {
       "name": "Neutral",
-      "color": "#bdbdbd",
-      "players": [],
-      "score": 0,
-      "numberQuestionTried": 0
+      "color": "#bdbdbd"
     },
     {
       "name": "Red",
-      "color": "#c62828",
-      "players": [],
-      "score": 0,
-      "numberQuestionTried": 0
+      "color": "#c62828"
     },
     {
       "name": "Green",
       "color": "#43a047",
-      "players": [],
-      "score": 0,
-      "numberQuestionTried": 0
     }
-  ],
-  "spots": [
+  },
+  "spots": {
     {
       "title": "Département Informatique",
       "lat": 48.086012,
@@ -41,8 +32,8 @@
       "long": -0.759738,
       "status": "Neutral"
     }
-  ],
-  "questions": [
+  },
+  "questions": {
     {
       "title": "Eau",
       "questionType": "TEXT",
@@ -95,5 +86,5 @@
       ],
       "answer": "TDM2"
     }
-  ]
+  }
 }

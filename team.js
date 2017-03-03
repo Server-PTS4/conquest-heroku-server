@@ -19,16 +19,6 @@ const winston = require('winston');
 const spots = require('./spots');
 
 
-function createTeam(name, color) {
-    db.get('teams').find({ name: name }).assign({
-        "name" : name,
-        "color" : color,
-        "players" : [],
-        "score" : 0,
-        "numberQuestionTried" : 0}).value();
-}
-exports.resetTeam = createTeam;
-
 function addPlayer(teamName, player) {
     if(playerFinder(player)!=null) {
         winston.error("A Player have tried to choose an username that is already in database!");

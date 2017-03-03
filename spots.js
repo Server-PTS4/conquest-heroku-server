@@ -9,10 +9,9 @@
 const low = require('lowdb');
 const winston = require('winston');
 const fileSync = require('lowdb/lib/file-sync');
-const db = low('db.json', {
-    storage: fileSync
-})
+const db = low('db.json', { storage: fileSync });
 const _ = require('lodash');
+const init = require('./initialize');
 
 
 function getSpot(title) {
@@ -41,10 +40,10 @@ function verifIfTeamWin() {
         }
     });
     if(redWin) {
-        resetSpots();
+        init.resetSpots();
         return "Red"
     } else if(greenWin) {
-        resetSpots();
+        init.resetSpots();
         return "Green"
     }
     winston.info('Neutral spot info');
@@ -56,10 +55,3 @@ function getSpotList() {
     return db.get('spots').value();
 }
 exports.getSpotList = getSpotList;
-
-function resetSpots() {
-    _.each(db.get('spots').value(), function (value, key) {
-        value.status="Neutral";
-    });
-}
-exports.resetSpots = resetSpots;
