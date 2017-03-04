@@ -10,10 +10,9 @@ const winston = require('winston');
 function getData(query) {
 	let data = "";
 
-	//query = '{	Spot: "Dormerie" {		latitude		longitude	}	Player {name}	hello {		world {			alan			turing			amd			ryzen {				intel				egal				merde			}		}	}}';
+	//query = '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
 
 	query = stringifyQuery(query);
-	winston.info(query);
 
 	if (isSyntaxCorrect(query)) {
 		let queryArguments = getArguments(query);
@@ -50,15 +49,72 @@ function stringifyQuery(query) {
 
 function isSyntaxCorrect(query) {
 	if (query.charAt(0) == '{') {
-		// TODO
+		if (query.charAt(query.length - 1) == '}') {
+			let nbBracketsOpened = 0;
+			let nbQuotesOpened = 0;
+			let placeOfFirstQuoteBadSyntax = 0;
+
+			for (let i = 0; i < query.length; i++) {
+				switch (query.charAt(i)) {
+					case '{':
+						nbBracketsOpened++;
+						break;
+					case '}':
+						nbBracketsOpened--;
+						break;
+					case '"':
+						if (nbQuotesOpened < 0) {
+							nbQuotesOpened++;
+						} else {
+							nbQuotesOpened--;
+						}
+						
+						if (query.charAt(i - 1) != ':' && nbQuotesOpened < 0 && placeOfFirstQuoteBadSyntax == 0) {
+							placeOfFirstQuoteBadSyntax = i;							
+						}
+						break;
+				}
+			}
+
+			if (nbQuotesOpened != 0) {
+				winston.error('Syntax error on query:\n' + query + '\nNot all the quotes are closed starting at: ' + query.substring(query.indexOf('"'), query.length));
+				return false;
+			} else {
+				// TODO indexOf => probleme, il ne renvoie pas la bonne place
+				winston.error('Syntax error on query:\n' + query + '\nExpected ":" before: "' + query.substring(placeOfFirstQuoteBadSyntax + 1, query.length)
+								.substring(0, query.indexOf('"')));
+							return false;
+			}
+
+			for (let i = 0; i < query.length; i++) {
+				if (nbBracketsOpened != 0) {
+					// TODO
+					if (nbBracketsOpened > 0) {
+						expectedChar = '}';
+						foundChar = '';	
+						winston.error('Syntax error on query:\n' + query + '\nExpected "' + expectedChar + '" found "' + foundChar + '" instead');
+						return false;
+					} else {
+						if (query.charAt(i)) {
+						}
+						expectedChar = '{';
+						foundChar =  '';
+						winston.error('Syntax error on query:\n' + query + '\nExpected "' + expectedChar + '" found "' + foundChar + '" instead');
+						return false;
+					}
+				}
+			}
+		} else {
+			// Syntax error: should end with a '}'
+			winston.error('Syntax error on query:\n' + query + '\nExpected "}" at end of query. Found "' + query.charAt(query.length - 1) + '" instead');
+			return false;
+		}
 	} else {
 		// Syntax error: should start with a '{'
-		let expectedChar = '{';
-		let foundChar = query.charAt(0);
-		let errorMessage = 'Syntax error on query:\n' + query + '\nAt line 1: expected "' + expectedChar + '" found "' + foundChar + '" instead';
-		winston.error(errorMessage);
+		winston.error('Syntax error on query:\n' + query + '\nExpected "{" at start of query. Found  "' + query.charAt(0) + '" instead');
 		return false;
 	}
+
 	return true;
 }
 
@@ -75,16 +131,26 @@ function getArguments(query) {
         argument += query.charAt(i);
         if (query.charAt(i) == '{') {
                 nbBrackets++;
-        } else if (query.charAt(i) == '}') {
+        }
+        if (query.charAt(i) == '}') {
             nbBrackets--;
             if (nbBrackets == 0) {
                 queryArguments.push(argument);
                 argument = "";
             }
         }
+        if (query.charAt(i) == ' ' && query.charAt(i - 1) != '}') {
+            if (nbBrackets == 0) {
+                queryArguments.push(argument);
+                argument = "";
+            }
+        }
     }
-    
-    winston.info(queryArguments);
+
+    if (argument != "") {
+    	queryArguments.push(argument);
+    }
+
 	return queryArguments;
 }
 
