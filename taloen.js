@@ -10,14 +10,14 @@ const winston = require('winston');
 function getData(query) {
 	let data = "";
 
-	//query = '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
+	query = '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
 
 	query = stringifyQuery(query);
 
 	if (isSyntaxCorrect(query)) {
 		let queryArguments = getArguments(query);
 		// Parse arguments
-		parseArgument(query);
+		parseArgument(queryArguments);
 	}
 
 	if (data == "") {
@@ -92,26 +92,26 @@ function isSyntaxCorrect(query) {
 					if (nbBracketsOpened > 0) {
 						expectedChar = '}';
 						foundChar = '';	
-						winston.error('Syntax error on query:\n' + query + '\nExpected "' + expectedChar + '" found "' + foundChar + '" instead');
+						winston.error('Syntax error on query:\n' + query + '\nExpected ' + expectedChar + ' found ' + foundChar + ' instead');
 						return false;
 					} else {
 						if (query.charAt(i)) {
 						}
 						expectedChar = '{';
 						foundChar =  '';
-						winston.error('Syntax error on query:\n' + query + '\nExpected "' + expectedChar + '" found "' + foundChar + '" instead');
+						winston.error('Syntax error on query:\n' + query + '\nExpected ' + expectedChar + ' found ' + foundChar + ' instead');
 						return false;
 					}
 				}
 			}
 		} else {
 			// Syntax error: should end with a '}'
-			winston.error('Syntax error on query:\n' + query + '\nExpected "}" at end of query. Found "' + query.charAt(query.length - 1) + '" instead');
+			winston.error('Syntax error on query:\n' + query + '\nExpected } at end of query. Found ' + query.charAt(query.length - 1) + ' instead');
 			return false;
 		}
 	} else {
 		// Syntax error: should start with a '{'
-		winston.error('Syntax error on query:\n' + query + '\nExpected "{" at start of query. Found  "' + query.charAt(0) + '" instead');
+		winston.error('Syntax error on query:\n' + query + '\nExpected { at start of query. Found  ' + query.charAt(0) + ' instead');
 		return false;
 	}
 
@@ -154,13 +154,17 @@ function getArguments(query) {
 	return queryArguments;
 }
 
-function parseArgument(arg) {
-	const argument = "";
-	if (doArgumentExists(argument)) {}
+function parseArgument(args) {
+	for (i in args) {
+		winston.info(args[i]);
+		if (doArgumentExists(args[i])) {
+
+		}
+	}	
 }
 
 function doArgumentExists(argument) {
-
+	return true;
 }
 
 function searchFor(object, id) {
