@@ -32,6 +32,8 @@ function getData(query) {
 		list += team.getTeamList() + ",";
 		list += spot.getSpotList();
 	}
+
+	winston.info('LISTE :' + list);
 	
 	//query = stringifyQuery(testQuery());
     
