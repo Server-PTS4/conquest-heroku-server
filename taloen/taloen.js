@@ -32,6 +32,8 @@ function getData(query) {
 		list += spot.getTeamList() + ",";
 		list += team.getSpotList();
 	}
+
+	winston.error('LISTE A ENVOYER : 'list);
 	
 	//query = stringifyQuery(testQuery());
     
