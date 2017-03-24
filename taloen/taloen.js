@@ -20,17 +20,17 @@ const team = require('./../team');
 const spot = require('./../spot');
 
 function getData(query) {
-	let list = [];
+	let list = "";
 	
 	if(query == "{team{*player}}")
-		list.push(team.getTeamObject(players));
+		list += team.getTeamObject(players);
 	if(query == "{team}")
-		list.push(team.getTeamList());
+		list += team.getTeamList();
         if(query == "{spot}")
-		list.push(spot.getSpotList());
+		list += spot.getSpotList();
 	if(query == "{ spot team }") {
-		list.push(spot.getSpotList());
-		list.push(team.getTeamList());
+		list += spot.getSpotList() + ",";
+		list += team.getTeamList();
 	}
 	
 	//query = stringifyQuery(testQuery());
