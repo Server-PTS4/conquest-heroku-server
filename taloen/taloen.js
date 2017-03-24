@@ -28,9 +28,9 @@ function getData(query) {
 		list += team.getTeamList();
         if(query == "{spot}")
 		list += spot.getSpotList();
-	if(query == "{ spot team }") {
-		list += spot.getSpotList() + ",";
-		list += team.getTeamList();
+	if(query == "{team spot}") {
+		list += spot.getTeamList() + ",";
+		list += team.getSpotList();
 	}
 	
 	//query = stringifyQuery(testQuery());
