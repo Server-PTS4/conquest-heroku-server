@@ -1,28 +1,28 @@
 /**
- * Created by charles on 10/01/2017.
- */
-
-/**
  * External Module dependencies.
  */
 //DataBase
 const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
-const db = low('db.json', {
-    storage: fileSync
-})
-const _ = require('lodash');
+const db = low('db.json', { storage: fileSync });
 
-function getQuestion(title) {
-    return db.get('question').find({ title: title }).value();
-}
-exports.getQuestion = getQuestion;
-
-function getQuestionRandom() {
-    return db.get('questions').value()[getRandom(0,db.get('questions').value().length-1)];
-}
-exports.getQuestionRandom = getQuestionRandom;
-
+// Function to choose a random question
 function getRandom(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
+
+// Getter of question with a title to key
+function getQuestion(title) {
+    return db.get('question').find({ title: title }).value();
+}
+
+// Getter of question
+function getQuestionRandom() {
+    return db.get('question').value()[getRandom(0, db.get('question').value().length - 1)];
+}
+
+/**
+ * Export the function
+ */
+exports.getQuestion = getQuestion;
+exports.getQuestionRandom = getQuestionRandom;

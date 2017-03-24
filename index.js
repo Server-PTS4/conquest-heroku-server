@@ -1,6 +1,11 @@
 /**
+ * index.js is the creation of server to communicate with socket.io
+ */
+
+/**
  * External Module dependencies.
  */
+// Create the serve and the socket connection
 const app = require('express')();
 const server = require('http').createServer(app);
 const socket = require('socket.io')(server);
@@ -25,22 +30,21 @@ const logger = new (winston.Logger)({
 /**
  * Internal Module dependencies.
  */
-const teamHandler = require('./team');
-const spots = require('./spots');
-const question = require('./question');
 // Database
-const taloen = require('./taloen');
+const taloen = require('./taloen/taloen');
+// Initialization
 const init = require('./initialize')
 
 /**
  * GameCreating
  */
+init.newGame();
+
 const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
-console.log(db.get('teams').value());
-
-init.newGame();
+const team = require('./team');
+team.getTeamList();
 
 /**
  * Express Route configuration
@@ -54,10 +58,6 @@ app.get('/', function (req, res, next) {
  */
 socket.on('connection', (socket) => {
     winston.info('A user connected');
-    
-    socket.on('disconnect', () => {
-        winston.info('A user disconnected');
-    });
 
     socket.on('isAlive', (message) => {
         if (message == "alan") {
@@ -67,6 +67,10 @@ socket.on('connection', (socket) => {
 
     socket.on('getData', (message) => {
     	socket.emit('getData', taloen.getData(message));
+    });
+
+    socket.on('disconnect', () => {
+        winston.info('A user disconnected');
     });
 });
 

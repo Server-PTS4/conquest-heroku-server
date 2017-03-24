@@ -1,29 +1,15 @@
 /**
- * TalOen is a self created API designed like GraphQL API used to get data quickly and easily
- */
-
-/**
  * External Module dependencies.
  */
+// Print console
 const winston = require('winston');
 
-function getData(query) {
-	let data = "";
-
-	query = '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
-
-	query = stringifyQuery(query);
-
-	if (isSyntaxCorrect(query)) {
+function verifSyntax(query) {
+    if (isSyntaxCorrect(query)) {
 		let queryArguments = getArguments(query);
 		// Parse arguments
 		parseArgument(queryArguments);
 	}
-
-	if (data == "") {
-		data = "error";
-	}
-	return data;
 }
 
 function stringifyQuery(query) {
@@ -171,4 +157,4 @@ function searchFor(object, id) {
 
 }
 
-exports.getData = getData;
+exports.verifSyntax = verifSyntax;
