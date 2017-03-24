@@ -29,11 +29,9 @@ function getData(query) {
         if(query == "{spot}")
 		list += spot.getSpotList();
 	if(query == "{team spot}") {
-		list += spot.getTeamList() + ",";
-		list += team.getSpotList();
+		list += team.getTeamList() + ",";
+		list += spot.getSpotList();
 	}
-
-	winston.error('LISTE A ENVOYER : 'list);
 	
 	//query = stringifyQuery(testQuery());
     
