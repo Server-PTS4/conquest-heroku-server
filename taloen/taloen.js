@@ -25,8 +25,8 @@ function getData(query) {
 	if(query == "{team{*player}}")
 		list += team.getTeamObject(players);
 	if(query == "{team}")
-		list += team.getTeamList();
-        if(query == "{spot}")
+		return team.getTeamList();
+    if(query == "{spot}")
 		list += spot.getSpotList();
 	if(query == "{team spot}") {
 		list += team.getTeamList() + ",";
