@@ -64,6 +64,7 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('newPlayer', (message) => {
+        winston.info('New player: ' + JSON.stringify(message));
     	socket.emit('newPlayer', taloen.newPlayer(message));
     });
 
