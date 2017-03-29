@@ -15,39 +15,50 @@ const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
 
-
+const classe = require('./classe');
 const team = require('./../team');
 const spot = require('./../spot');
 
 function getData(query) {
-	let list = "";
-	
-	if (query == "{team{*player}}")
-		list += team.getTeamObject(players);
-	if (query == "{team}") {
-		return team.getTeamList();
-	}
-    if (query == "{spot}")
-		return spot.getSpotList();
-	if (query == "{team spot}") {
-		list += team.getTeamList() + ",";
-		list += spot.getSpotList();
+	let data = "";
+
+	classe.verifClass();
+
+	winston.info(classe.getValue(query).length);
+	winston.info(classe.getValue(query, "Neutral"));
+
+	if(query == "{team{*player}}")
+		data += JSON.stringifyQuery(team.getTeamObject(players));
+	if(query == "{team}")
+		data += JSON.stringifyQuery(team.getTeamList());
+    if(query == "{spot}")
+		data += JSON.stringifyQuery(spot.getSpotList());
+	if(query == "{team spot}") {
+		data += JSON.stringifyQuery(team.getTeamList() + ",");
+		data += JSON.stringifyQuery(spot.getSpotList());
 	}
 
-	
-	
-	//query = stringifyQuery(testQuery());
-    
+	winston.info('LISTE :' + data);
+
+	//query = stringifyQuery(query);
+
     //convert.verifSyntax(query);
 
 	//if (data == "") {
 	//	data = "error";
 	//}
-	return list;
+	return data;
 }
 
-function testQuery() {
-    return '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
+function newPlayer(query) {
+		query = JSON.parse(query);
+		var a = query.get("username");
+		winston.info(a);
+		var b = query.get("preferedTeam");
+		winston.info(b);
+
+
 }
 
+exports.newPlayer = newPlayer
 exports.getData = getData;
