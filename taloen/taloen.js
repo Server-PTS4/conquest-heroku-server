@@ -51,12 +51,10 @@ function getData(query) {
 }
 
 function newPlayer(query) {
-		query = JSON.parse(query);
-		winston.info(query);
-		var a = query.username;
-		winston.info(a);
-		var b = query.preferedTeam;
-		winston.info(b);
+	let teamPlayer = team.addPlayer(JSON.parse(query).preferedTeam, JSON.parse(query).username);
+	winston.info(teamPlayer);
+	winston.info(db.value());
+	return teamPlayer;
 }
 
 exports.newPlayer = newPlayer

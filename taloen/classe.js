@@ -50,3 +50,4 @@ function getValueExclusion(dataClass, exclusion, dataKey) {
 }
 
 exports.getValue = getValue;
+exports.verifClass = verifClass;
