@@ -133,14 +133,14 @@ function getPlayerList() {
             list.push(player);
         })
     });
-    
+
     return list;
 }
 exports.getPlayerList = getPlayerList;
 
 function getTeamObject(exclusion) {
 	let list = [];
-	
+
 	_.each(db.get('team').value(),function (team) {
 		let data = [];
 		data.push(team.name);
@@ -149,7 +149,7 @@ function getTeamObject(exclusion) {
 		data.push(team.questionTried);
 		list.push(data);
 	});
-	
+
 	return list;
 }
 

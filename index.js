@@ -32,19 +32,13 @@ const logger = new (winston.Logger)({
  */
 // Database
 const taloen = require('./taloen/taloen');
-// Initialization
-const init = require('./initialize')
 
 /**
  * GameCreating
  */
+// Initialization
+const init = require('./initialize')
 init.newGame();
-
-const low = require('lowdb');
-const fileSync = require('lowdb/lib/file-sync');
-const db = low('db.json', { storage: fileSync });
-const team = require('./team');
-team.getTeamList();
 
 /**
  * Express Route configuration
@@ -66,12 +60,11 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('getData', (message) => {
-        winston.info('Get data received ');
     	socket.emit('getData', taloen.getData(message));
     });
 
     socket.on('newPlayer', (message) => {
-        winston.info('New player : ' + JSON.stringify(message));
+    	socket.emit('newPlayer', taloen.newPlayer(message));
     });
 
     socket.on('disconnect', () => {
