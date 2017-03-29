@@ -22,18 +22,20 @@ const spot = require('./../spot');
 function getData(query) {
 	let list = "";
 	
-	if(query == "{team{*player}}")
+	if (query == "{team{*player}}")
 		list += team.getTeamObject(players);
-	if(query == "{team}")
+	if (query == "{team}") {
+		winston.info('LISTE :' + team.getTeamList());
 		return team.getTeamList();
-    if(query == "{spot}")
+	}
+    if (query == "{spot}")
 		return spot.getSpotList();
-	if(query == "{team spot}") {
+	if (query == "{team spot}") {
 		list += team.getTeamList() + ",";
 		list += spot.getSpotList();
 	}
 
-	winston.info('LISTE :' + list);
+	
 	
 	//query = stringifyQuery(testQuery());
     
