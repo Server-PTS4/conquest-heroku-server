@@ -66,12 +66,12 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('getData', (message) => {
-        winston.info('Get data received');
-    	socket.emit('getData', taloen.getData(JSON.stringify(message)));
+        winston.info('Get data received ');
+    	socket.emit('getData', taloen.getData(message));
     });
 
     socket.on('newPlayer', (message) => {
-        winston.info('New player : ' + message);
+        winston.info('New player : ' + JSON.stringify(message));
     });
 
     socket.on('disconnect', () => {
