@@ -25,7 +25,6 @@ function getData(query) {
 	if (query == "{team{*player}}")
 		list += team.getTeamObject(players);
 	if (query == "{team}") {
-		winston.info('LISTE :' + JSON.stringify(team.getTeamList()));
 		return team.getTeamList();
 	}
     if (query == "{spot}")
