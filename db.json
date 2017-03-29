@@ -77,37 +77,37 @@
     {
       "name": "Département Informatique",
       "latitude": 48.086012,
-      "longitude": -0.759521,      
+      "longitude": -0.759521,
       "radius": 15
     },
     {
       "name": "Parking",
       "latitude": 48.085445810389906,
-      "longitude": -0.7593280076980591,      
+      "longitude": -0.7593280076980591,
       "radius": 15
     },
     {
       "name": "Dormerie",
       "latitude": 48.084962,
-      "longitude": -0.759738,      
+      "longitude": -0.759738,
       "radius": 15
     },
     {
       "name": "Bibliothèque Universitaire",
       "latitude": 48.084962,
-      "longitude": -0.759738,      
+      "longitude": -0.759738,
       "radius": 15
     },
     {
       "name": "Département Génie Biologique",
       "latitude": 48.084962,
-      "longitude": -0.759738,      
+      "longitude": -0.759738,
       "radius": 15
     },
     {
       "name": "Restaurant Universitaire",
       "latitude": 48.084962,
-      "longitude": -0.759738,      
+      "longitude": -0.759738,
       "radius": 15
     }
   ],
