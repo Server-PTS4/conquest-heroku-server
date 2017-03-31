@@ -45,49 +45,48 @@ exports.verifIfTeamWin = verifIfTeamWin
 /**
  * Add player
  */
-
  function addPlayer(teamName, player) {
      if(playerFinder(player)!=null) {
          winston.error("A Player have tried to choose an username that is already in database!");
-         return "Neutral";
+         return false;
      }
      if(db.get('team').find({ name: "Red" }).value().players.length == db.get('team').find({ name: "Green" }).value().players.length) {
          db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().players.push({
              username: player,
              numberQuestionTried: 0,
              score : 0,
-             lat : 0,
-             long : 0
+             latitude : 0,
+             longitude : 0
          })).value();
-         return teamName;
+         return true;
      }
      if(db.get('team').find({ name: "Red" }).value().players.length > db.get('team').find({ name: "Green" }).value().players.length) {
          db.get('team').find({ name: "Green" }).assign(db.get('team').find({ name: "Green" }).value().players.push({
              username: player,
              numberQuestionTried: 0,
              score : 0,
-             lat : 0,
-             long : 0
+             latitude : 0,
+             longitude : 0
          })).value();
-         return "Green";
+         return true;
      } else if(db.get('team').find({ name: "Red" }).value().players.length < db.get('team').find({ name: "Green" }).value().players.length) {
          db.get('team').find({ name: "Red" }).assign(db.get('team').find({ name: "Red" }).value().players.push({
              username: player,
              numberQuestionTried: 0,
              score : 0,
-             lat : 0,
-             long : 0
+             latitude : 0,
+             longitude : 0
          })).value();
-         return "Red";
+         return true;
      } else {
          db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().players.push({
              username: player,
              numberQuestionTried: 0,
              score : 0,
-             lat : 0,
-             long : 0
+             latitude : 0,
+             longitude : 0
          })).value();
-         return teamName;
+         return true;
      }
  }
  exports.addPlayer = addPlayer;
@@ -108,7 +107,7 @@ exports.verifIfTeamWin = verifIfTeamWin
  }
  exports.answerToQuestion = answerToQuestion;
 
- // Useless, Can be usefull later
+ // Useless, Can be usefull latitudeer
  function changePlayerScore(playerUsername, score) {
      const teamName = playerTeamFinder(playerUsername).name;
      const team =  db.get('team').find({ name: teamName}).value();
@@ -118,14 +117,14 @@ exports.verifIfTeamWin = verifIfTeamWin
  }
  exports.changePlayerScore = changePlayerScore;
 
- function changePlayerPosition(playerUsername, lat, long) {
+ function changePlayerPosition(playerUsername, latitude, longitude) {
      const teamName = playerTeamFinder(playerUsername).name;
      const team =  db.get('team').find({ name:teamName}).value();
      let player = _.find(team.players, function (player) {
          return player.username=playerUsername;
      });
-     player.lat = lat;
-     player.long= long;
+     player.latitude = latitude;
+     player.longitude= longitude;
      db.get('team').find({ name: teamName}).assign(team).value();
  }
  exports.changePlayerPosition = changePlayerPosition;
