@@ -24,16 +24,16 @@ function getData(query) {
 	let data = "";
 
 	//It is to server timer
-	var date = new Date();
-	console.log(date);
+	//var date = new Date();
+	//console.log(date);
 	//let list = ["player"];
-	//console.log(classe.getValueExclusion(query, list));
+	//console.log(classe.getValueUsed(query, list));
 
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);
 	if(query == "{team}")
 		return team.getTeamList();
-    if(query == "{spot}")
+  if(query == "{spot}")
 		return spot.getSpotList();
 	if(query == "{team spot}") {
 		data += team.getTeamList() + ",";

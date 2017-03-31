@@ -35,7 +35,7 @@ function setValue(dataClass, dataKey, value) {
   }
 }
 
-function getValueExclusion(dataClass, dataUsed, dataKey) {
+function getValueUsed(dataClass, dataUsed, dataKey) {
   let list = [];
   let listUsed = dataUsed;
 
