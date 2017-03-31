@@ -29,9 +29,6 @@ function getData(query) {
 	//let list = ["player"];
 	//console.log(classe.getValueExclusion(query, list));
 
-	var a = funct.addPlayer(JSON.parse(query).preferedTeam, JSON.parse(query).username);
-	console.log(a);
-
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);
 	if(query == "{team}")
