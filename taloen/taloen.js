@@ -22,20 +22,21 @@ const spot = require('./../spot');
 function getData(query) {
 	let data = "";
 
-	classe.verifClass();
+	//console.log(classe.verifClass());
+ 	//var list = [];
+ 	//list = classe.getValue(query);
 
-	winston.info(classe.getValue(query).length);
-	winston.info(classe.getValue(query, "Neutral"));
+	//winston.info(classe.getValue(query, "Neutral"));
 
 	if(query == "{team{*player}}")
-		data += JSON.stringifyQuery(team.getTeamObject(players));
+		data += team.getTeamObject(players);
 	if(query == "{team}")
-		data += JSON.stringifyQuery(team.getTeamList());
+		data += team.getTeamList();
     if(query == "{spot}")
-		data += JSON.stringifyQuery(spot.getSpotList());
+		data += spot.getSpotList();
 	if(query == "{team spot}") {
-		data += JSON.stringifyQuery(team.getTeamList() + ",");
-		data += JSON.stringifyQuery(spot.getSpotList());
+		data += team.getTeamList() + ",";
+		data += spot.getSpotList();
 	}
 
 	winston.info('LISTE :' + data);
@@ -50,12 +51,4 @@ function getData(query) {
 	return data;
 }
 
-function newPlayer(query) {
-	let teamPlayer = team.addPlayer(JSON.parse(query).preferedTeam, JSON.parse(query).username);
-	winston.info(teamPlayer);
-	winston.info(db.value());
-	return teamPlayer;
-}
-
-exports.newPlayer = newPlayer
 exports.getData = getData;

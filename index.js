@@ -32,6 +32,7 @@ const logger = new (winston.Logger)({
  */
 // Database
 const taloen = require('./taloen/taloen');
+const funct = require('./taloen/function');
 
 /**
  * GameCreating
@@ -64,8 +65,7 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('newPlayer', (message) => {
-        winston.info('New player: ' + JSON.stringify(message));
-    	socket.emit('newPlayer', taloen.newPlayer(message));
+    	socket.emit('newPlayer', funct.newPlayer(message));
     });
 
     socket.on('disconnect', () => {

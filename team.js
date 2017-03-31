@@ -20,8 +20,8 @@ function addPlayer(teamName, player) {
         winston.error("A Player have tried to choose an username that is already in database!");
         return "Neutral";
     }
-    if(db.get('team').find({ name: "Red" }).value().players.length == db.get('team').find({ name: "Green" }).value().players.length) {
-        db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().players.push({
+    if(db.get('team').find({ name: "Red" }).value().player.length == db.get('team').find({ name: "Green" }).value().player.length) {
+        db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().player.push({
             username: player,
             numberQuestionTried: 0,
             score : 0,
@@ -30,8 +30,8 @@ function addPlayer(teamName, player) {
         })).value();
         return teamName;
     }
-    if(db.get('team').find({ name: "Red" }).value().players.length > db.get('team').find({ name: "Green" }).value().players.length) {
-        db.get('team').find({ name: "Green" }).assign(db.get('team').find({ name: "Green" }).value().players.push({
+    if(db.get('team').find({ name: "Red" }).value().player.length > db.get('team').find({ name: "Green" }).value().player.length) {
+        db.get('team').find({ name: "Green" }).assign(db.get('team').find({ name: "Green" }).value().player.push({
             username: player,
             numberQuestionTried: 0,
             score : 0,
@@ -39,8 +39,8 @@ function addPlayer(teamName, player) {
             long : 0
         })).value();
         return "Green";
-    } else if(db.get('team').find({ name: "Red" }).value().players.length < db.get('team').find({ name: "Green" }).value().players.length) {
-        db.get('team').find({ name: "Red" }).assign(db.get('team').find({ name: "Red" }).value().players.push({
+    } else if(db.get('team').find({ name: "Red" }).value().player.length < db.get('team').find({ name: "Green" }).value().player.length) {
+        db.get('team').find({ name: "Red" }).assign(db.get('team').find({ name: "Red" }).value().player.push({
             username: player,
             numberQuestionTried: 0,
             score : 0,
@@ -49,7 +49,7 @@ function addPlayer(teamName, player) {
         })).value();
         return "Red";
     } else {
-        db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().players.push({
+        db.get('team').find({ name: teamName }).assign(db.get('team').find({ name: teamName }).value().player.push({
             username: player,
             numberQuestionTried: 0,
             score : 0,
@@ -77,19 +77,19 @@ function answerToQuestion(playerUsername, result, title, spotTitle) {
 exports.answerToQuestion = answerToQuestion;
 
 // Useless, Can be usefull later
-function changePlayerScore(playerUsername, score) {
+function changeplayercore(playerUsername, score) {
     const teamName = playerTeamFinder(playerUsername).name;
     const team =  db.get('team').find({ name: teamName}).value();
     team.score += score;
     playerFinder(playerUsername).score += score;
     db.get('team').find({ name: teamName}).assign(team).value();
 }
-exports.changePlayerScore = changePlayerScore;
+exports.changeplayercore = changeplayercore;
 
 function changePlayerPosition(playerUsername, lat, long) {
     const teamName = playerTeamFinder(playerUsername).name;
     const team =  db.get('team').find({ name:teamName}).value();
-    let player = _.find(team.players, function (player) {
+    let player = _.find(team.player, function (player) {
         return player.username=playerUsername;
     });
     player.lat = lat;
@@ -101,7 +101,7 @@ exports.changePlayerPosition = changePlayerPosition;
 function playerFinder(playerUsername) {
     let resultForEach=null;
     _.each(db.get('team').value(), function (team) {
-        const result =_.find(team.players, function (obj) {
+        const result =_.find(team.player, function (obj) {
             return playerUsername==obj.username;
         });
         if(result!=null)  {
@@ -115,7 +115,7 @@ function playerFinder(playerUsername) {
 function playerTeamFinder(playerUsername) {
     let resultForEach=null;
     _.each(db.get('team').value(), function (team) {
-        const result =_.find(team.players, function (obj) {
+        const result =_.find(team.player, function (obj) {
             return playerUsername==obj.username;
         });
         if(result!=null)  {
@@ -128,19 +128,19 @@ function playerTeamFinder(playerUsername) {
 function getPlayerList() {
     let list = [];
     _.each(db.get('team').value(),function (team) {
-        _.each(team.players, function (player) {
+        _.each(team.player, function (player) {
             player.team= team.name
             list.push(player);
         })
     });
-    
+
     return list;
 }
 exports.getPlayerList = getPlayerList;
 
 function getTeamObject(exclusion) {
 	let list = [];
-	
+
 	_.each(db.get('team').value(),function (team) {
 		let data = [];
 		data.push(team.name);
@@ -149,7 +149,7 @@ function getTeamObject(exclusion) {
 		data.push(team.questionTried);
 		list.push(data);
 	});
-	
+
 	return list;
 }
 
