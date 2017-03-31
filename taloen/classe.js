@@ -10,14 +10,8 @@ const db = low('db.json', { storage: fileSync });
 var fs = require('fs');
 
 function readData() {
-  var result = "";
-
-  fs.readFile('db.json', 'utf8', function (err, data) {
-      if (err) throw err; // we'll not consider error handling for now
-      result = JSON.stringify(JSON.parse(data));
-  });
-
-  return result;
+  let file = fs.readFileSync('db.json', 'utf8')
+  return JSON.stringify(JSON.parse(file));
 }
 
 function verifClass(dataClass) {
