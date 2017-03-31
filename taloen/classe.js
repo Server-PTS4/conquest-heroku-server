@@ -9,17 +9,6 @@ const db = low('db.json', { storage: fileSync });
 
 var fs = require('fs');
 
-function readData() {
-  var result = "";
-
-  fs.readFile('db.json', 'utf8', function (err, data) {
-      if (err) throw err; // we'll not consider error handling for now
-      result = JSON.stringify(JSON.parse(data));
-  });
-
-  return result;
-}
-
 function verifClass(dataClass) {
   let exist = false;
 
@@ -32,11 +21,9 @@ function verifClass(dataClass) {
 
 function getValue(dataClass, dataKey) {
   if (typeof dataKey === 'undefined') {
-    return readData();
-    //return db.get(dataClass).value();
+    return db.get(dataClass).value();
   }
-
-  //return db.get(dataClass).find({ name: dataKey}).value();
+  return db.get(dataClass).find({ name: dataKey}).value();
 }
 
 function setValue(dataClass, dataKey, value) {
