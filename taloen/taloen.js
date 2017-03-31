@@ -22,11 +22,11 @@ const spot = require('./../spot');
 function getData(query) {
 	let data = "";
 
-	//console.log(classe.verifClass());
- 	//var list = [];
- 	//list = classe.getValue(query);
-
-	//winston.info(classe.getValue(query, "Neutral"));
+	//It is to server timer
+	var date = new Date();
+	console.log(date);
+	let list = ["player"];
+	console.log(classe.getValueExclusion(query, list));
 
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);

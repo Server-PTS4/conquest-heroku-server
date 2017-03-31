@@ -56,7 +56,7 @@ socket.on('connection', (socket) => {
 
     socket.on('isAlive', (message) => {
         if (message == "alan") {
-            socket.emit('isAlive', "turing");
+            socket.emit('isAlive', new Date());
         }
     });
 

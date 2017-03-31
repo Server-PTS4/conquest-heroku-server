@@ -8,13 +8,13 @@ const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
 
 function verifClass(dataClass) {
-  let list = [];
+  let exist = false;
 
-  for (var i = 0; i < list.length; i++)
-    if (list[i] == dataClass)
-      return true
+  _.each(db.value(), function (value, key) {
+    if (key == dataClass) exist = true;
+  });
 
-  return false
+  return exist;
 }
 
 function getValue(dataClass, dataKey) {
@@ -38,16 +38,16 @@ function setValue(dataClass, dataKey, value) {
 function getValueExclusion(dataClass, exclusion, dataKey) {
   let list = [];
   let listExclusion = exclusion;
-  let listClass = dataClass.value();
 
-  for(var i = 0; i < listClass.length; i++) {
+  for(var i = 0; i < listExclusion.length; i++) {
     if(typeof dataKey === 'undefined') {
       _.each(db.get(dataClass).value(), function (value, key) {
-        if(key != listExclusion[i]) list.push(value.key);
+        console.log(value.key);
+        if(key != listExclusion[i]) list.push();
       });
     } else {
       _.each(db.get(dataClass).find({ name: dataKey }).value(), function (value, key) {
-        if(key != listExclusion[i]) list.push(value.key);
+        if(key != listExclusion[i]) list.push(key);
       });
     }
   }

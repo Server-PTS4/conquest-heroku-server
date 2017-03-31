@@ -5,17 +5,16 @@
 /**
  * External Module dependencies.
  */
+const _ = require('lodash');
 //Database
 const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
-const _ = require('lodash');
 
 // Create a new Game
 function newGame() {
-	db.defaults({ teams: [] }).value();
-	db.defaults({ spots: [] }).value();
-	db.defaults({ questions: [] }).value();
+	db.defaults({ team: [] }).value();
+	db.defaults({ question: [] }).value();
 	initializeTeam();
 	resetSpots();
 }
