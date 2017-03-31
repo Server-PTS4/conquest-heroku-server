@@ -66,8 +66,7 @@ socket.on('connection', (socket) => {
 
     socket.on('newPlayer', (message) => {
         winston.info(message)
-        winston.info(JSON.parse(message))
-    	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
+    	socket.emit('newPlayer', funct.addPlayer(message.username, message.preferedTeam));
     });
 
     socket.on('disconnect', () => {
