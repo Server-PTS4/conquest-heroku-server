@@ -56,5 +56,5 @@ function getValueUsed(dataClass, dataUsed, dataKey) {
 
 exports.getValue = getValue;
 exports.verifClass = verifClass;
-exports.getValueExclusion = getValueExclusion;
+exports.getValueUsed = getValueUsed;
 exports.setValue = setValue;
