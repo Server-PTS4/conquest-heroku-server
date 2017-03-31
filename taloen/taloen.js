@@ -18,6 +18,7 @@ const db = low('db.json', { storage: fileSync });
 const classe = require('./classe');
 const team = require('./../team');
 const spot = require('./../spot');
+const funct = require('./function');
 
 function getData(query) {
 	let data = "";
@@ -25,8 +26,11 @@ function getData(query) {
 	//It is to server timer
 	var date = new Date();
 	console.log(date);
-	let list = ["player"];
-	console.log(classe.getValueExclusion(query, list));
+	//let list = ["player"];
+	//console.log(classe.getValueExclusion(query, list));
+
+	var a = funct.addPlayer(JSON.parse(query).preferedTeam, JSON.parse(query).username);
+	console.log(a);
 
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);

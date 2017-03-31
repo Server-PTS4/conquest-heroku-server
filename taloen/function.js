@@ -41,7 +41,7 @@ exports.verifIfTeamWin = verifIfTeamWin
 /**
  * Add player
  */
- function addPlayer(teamName, player) {
+ function addPlayer(player, teamName) {
      if(playerFinder(player)!=null) {
          winston.error("A Player have tried to choose an username that is already in database!");
          return false;
@@ -84,6 +84,8 @@ exports.verifIfTeamWin = verifIfTeamWin
          })).value();
          return true;
      }
+     winston.error("Aucun if de addPlayer n'a pu supporter les argument en entree");
+     return false;
  }
  exports.addPlayer = addPlayer;
 
