@@ -26,11 +26,9 @@ function verifClass(dataClass) {
 
 function getValue(dataClass, dataKey) {
   if (typeof dataKey === 'undefined') {
-    return readData();
-    //return db.get(dataClass).value();
+    return db.get(dataClass).value();
   }
-
-  //return db.get(dataClass).find({ name: dataKey}).value();
+  return db.get(dataClass).find({ name: dataKey}).value();
 }
 
 function setValue(dataClass, dataKey, value) {

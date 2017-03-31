@@ -34,7 +34,7 @@ function getData(query) {
 	if(query == "{team}")
 		return JSON.parse(classe.getValue()).team;
   if(query == "{spot}")
-		return classe.getValue();
+		return spot.getSpotList();
 	if(query == "{team spot}") {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
