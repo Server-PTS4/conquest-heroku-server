@@ -42,7 +42,7 @@ function getValueExclusion(dataClass, exclusion, dataKey) {
   for(var i = 0; i < listExclusion.length; i++) {
     if(typeof dataKey === 'undefined') {
       _.each(db.get(dataClass).value(), function (value, key) {
-        console.log(value.key);
+        console.log(value.name);
         if(key != listExclusion[i]) list.push();
       });
     } else {

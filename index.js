@@ -56,8 +56,12 @@ socket.on('connection', (socket) => {
 
     socket.on('isAlive', (message) => {
         if (message == "alan") {
-            socket.emit('isAlive', new Date());
+            socket.emit('isAlive', "turing");
         }
+    });
+
+    socket.on('startGame', (message) => {
+        socket.emit('startGame', new Date());
     });
 
     socket.on('getData', (message) => {
