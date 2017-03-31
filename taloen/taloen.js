@@ -32,9 +32,9 @@ function getData(query) {
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);
 	if(query == "{team}")
-		return team.getTeamList();
+		return classe.getValue();
   if(query == "{spot}")
-		return spot.getSpotList();
+		return classe.getValue();
 	if(query == "{team spot}") {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();

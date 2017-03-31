@@ -13,11 +13,11 @@ const winston = require('winston');
 
 // Function to verify if a team win the game
 function verifIfTeamWin() {
-  let a = 0, b = 0, c = null;
+  let a = 0, b = 0, teamName = null;
 
   _.each(db.get('spots').value(), function (value, key) {
-    if (c == null) { c = value.status;}
-    if (value.status == c) { b++; }
+    if (teamName == null) { teamName = value.status;}
+    if (value.status == teamName) { b++; }
     a++;
   });
 

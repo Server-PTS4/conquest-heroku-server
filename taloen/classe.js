@@ -57,10 +57,6 @@ function getValueUsed(dataClass, dataUsed, dataKey) {
   for(var i = 0; i < dataUsed.length; i++) {
     if(typeof dataKey === 'undefined') {
       _.each(db.get(dataClass).value(), function (value, key) {
-        var a = transformJSON(value);
-        //console.log(dataUsed[i])
-        //console.log(a[i])
-        //list.push();
       });
     } else {
       console.log("Helloo else");
@@ -76,9 +72,7 @@ function transformJSON(json_data) {
   var result = [];
 
   for(var i in json_data) {
-    console.log(i);
-    result.push([i, json_data [i]]);
-    console.log(result[i]);
+    result.push(json_data [i]);
   }
 
     return result;
