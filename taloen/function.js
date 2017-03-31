@@ -9,6 +9,7 @@ const db = low('db.json', { storage: fileSync });
 
 const team = require('./../team');
 const spot = require('./../spot');
+const winston = require('winston');
 
 // Function to verify if a team win the game
 function verifIfTeamWin() {
@@ -33,11 +34,6 @@ function getQuestionRandom() {
     return db.get('question').value()[getRandom(0, db.get('question').value().length - 1)];
 }
 
-function newPlayer(query) {
-	team.addPlayer(JSON.parse(query).preferedTeam, JSON.parse(query).username);
-}
-
-exports.newPlayer = newPlayer
 exports.getQuestionRandom = getQuestionRandom
 exports.verifIfTeamWin = verifIfTeamWin
 

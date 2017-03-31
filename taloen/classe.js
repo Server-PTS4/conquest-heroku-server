@@ -35,19 +35,19 @@ function setValue(dataClass, dataKey, value) {
   }
 }
 
-function getValueExclusion(dataClass, exclusion, dataKey) {
+function getValueExclusion(dataClass, dataUsed, dataKey) {
   let list = [];
-  let listExclusion = exclusion;
+  let listUsed = dataUsed;
 
-  for(var i = 0; i < listExclusion.length; i++) {
+  for(var i = 0; i < listUsed.length; i++) {
     if(typeof dataKey === 'undefined') {
       _.each(db.get(dataClass).value(), function (value, key) {
-        console.log(value.name);
-        if(key != listExclusion[i]) list.push();
+        console.log(value.listUsed[i]);
+        if(key != listUsed[i]) list.push();
       });
     } else {
       _.each(db.get(dataClass).find({ name: dataKey }).value(), function (value, key) {
-        if(key != listExclusion[i]) list.push(key);
+        if(key != listUsed[i]) list.push(key);
       });
     }
   }

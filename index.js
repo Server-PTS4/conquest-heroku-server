@@ -69,8 +69,8 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('newPlayer', (message) => {
-        winston.info("New player with username: '" + message.username + "' and preferedTeam: '" + message.preferedTeam + "'");
-    	socket.emit('newPlayer', funct.addPlayer(message.username, message.preferedTeam));
+        winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
+    	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).preferedTeam, JSON.parse(message).username));
     });
 
     socket.on('disconnect', () => {
