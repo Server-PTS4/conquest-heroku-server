@@ -9,7 +9,7 @@ const db = low('db.json', { storage: fileSync });
 
 var fs = require('fs');
 
-function readData() {
+function readFile() {
   let file = fs.readFileSync('db.json', 'utf8')
   return JSON.stringify(JSON.parse(file));
 }
@@ -70,6 +70,7 @@ function transformJSON(json_data) {
     return result;
 }
 
+exports.readFile = readFile;
 exports.getValue = getValue;
 exports.verifClass = verifClass;
 exports.getValueUsed = getValueUsed;
