@@ -65,7 +65,7 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('newPlayer', (message) => {
-        winston.info("New player with username: '" + message.username + "' and preferedTeam: '" + message.preferedTeam"'");
+        winston.info("New player with username: '" + message.username + "' and preferedTeam: '" + message.preferedTeam + "'");
     	socket.emit('newPlayer', funct.addPlayer(message.username, message.preferedTeam));
     });
 
