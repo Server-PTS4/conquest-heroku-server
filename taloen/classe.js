@@ -7,6 +7,19 @@ const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
 
+var fs = require('fs');
+
+function readData() {
+  var result = "";
+
+  fs.readFile('db.json', 'utf8', function (err, data) {
+      if (err) throw err; // we'll not consider error handling for now
+      result = JSON.stringify(JSON.parse(data));
+  });
+
+  return result;
+}
+
 function verifClass(dataClass) {
   let exist = false;
 
@@ -18,9 +31,12 @@ function verifClass(dataClass) {
 }
 
 function getValue(dataClass, dataKey) {
-  if (typeof dataKey === 'undefined')
-    return db.get(dataClass).value();
-  return db.get(dataClass).find({ name: dataKey}).value();
+  if (typeof dataKey === 'undefined') {
+    return readData();
+    //return db.get(dataClass).value();
+  }
+
+  //return db.get(dataClass).find({ name: dataKey}).value();
 }
 
 function setValue(dataClass, dataKey, value) {
@@ -37,21 +53,35 @@ function setValue(dataClass, dataKey, value) {
 
 function getValueUsed(dataClass, dataUsed, dataKey) {
   let list = [];
-  let listUsed = dataUsed;
 
-  for(var i = 0; i < listUsed.length; i++) {
+  for(var i = 0; i < dataUsed.length; i++) {
     if(typeof dataKey === 'undefined') {
       _.each(db.get(dataClass).value(), function (value, key) {
-        console.log(value.listUsed[i]);
-        if(key != listUsed[i]) list.push();
+        var a = transformJSON(value);
+        //console.log(dataUsed[i])
+        //console.log(a[i])
+        //list.push();
       });
     } else {
+      console.log("Helloo else");
       _.each(db.get(dataClass).find({ name: dataKey }).value(), function (value, key) {
         if(key != listUsed[i]) list.push(key);
       });
     }
   }
   return list;
+}
+
+function transformJSON(json_data) {
+  var result = [];
+
+  for(var i in json_data) {
+    console.log(i);
+    result.push([i, json_data [i]]);
+    console.log(result[i]);
+  }
+
+    return result;
 }
 
 exports.getValue = getValue;
