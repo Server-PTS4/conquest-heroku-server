@@ -56,6 +56,8 @@ app.get('/', function (req, res, next) {
  */
 socket.on('connection', (socket) => {
     winston.info('A user connected');
+    var clientIp = socket.request.connection.remoteAddress;
+    console.log(clientIp);
 
     socket.on('isAlive', (message) => {
         if (message == "alan") {
