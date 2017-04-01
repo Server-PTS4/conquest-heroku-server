@@ -20,6 +20,11 @@ function readFile() {
 exports.readFile = readFile;
 */
 
+function getAll() {
+    return db.value();
+}
+exports.getAll = getAll;
+
 function setEndTime(endTime) {
   db.get('endTime').assign(JSON.stringify(endTime)).value();
 }
