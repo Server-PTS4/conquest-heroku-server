@@ -40,7 +40,7 @@ function getData(query) {
 		data += spot.getSpotList();
 	}
 	if(query == "{endTime}") {
-		return JSON.parse(funct.readFile()).endTime);
+		return JSON.parse(funct.readFile()).endTime;
 	}
 
 	winston.info('LISTE :' + data);
