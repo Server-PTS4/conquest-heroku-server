@@ -92,8 +92,8 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('changePosition', (message) => {
-        console.log(message);
-        const player = JSON.parse(message);
+        winston.info(message);
+        const player = JSON.parse(JSON.stringify(message));
         winston.info('the player '+player.username+' changer this position to lat:'+player.latitude+' and long: '+player.longitude);
         funct.changePlayerPosition(player.username, player.latitude, player.longitude);
     });
