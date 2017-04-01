@@ -27,7 +27,6 @@ const logger = new (winston.Logger)({
     ]
 });
 
-//winston.stream({start: -1}).on('log')
 /**
  * Internal Module dependencies.
  */
@@ -74,11 +73,11 @@ socket.on('connection', (socket) => {
       //socket.broadcast.emit('update', "update");
 
       if (funct.getPlayerList().length == 2) {
-        // 1800000 = 30 minutes
-        let dateEndGame = new Date(new Date().getTime() + 1800000);
+        // 120000 = 2 minutes
+        let dateEndGame = new Date(new Date().getTime() + 120000);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
         funct.setEndTime(dateEndGame);
-        socket.emit('startGame', JSON.stringify(dateEndGame));
+        socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
       }
     });
 
