@@ -27,9 +27,9 @@ function setValue(dataClass, dataKey, value) {
   if (value.length == dataKey.length) {
     for (var i = 0; i < dataKey.length; i++) {
       for(var a in value) {
-      let dataChange = getValue(dataKey[i]);
-      dataChange.dataKey = value[i];
-      db.get(dataClass).find(getValue(dataKey)).assign(dataChange).value();
+      //let dataChange = getValue(dataKey[i]);
+      //dataChange.dataKey = value[i];
+      //db.get(dataClass).find(getValue(dataKey)).assign(dataChange).value();
       }
     }
   } else {
