@@ -69,9 +69,6 @@ socket.on('connection', (socket) => {
     socket.on('newPlayer', (message) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
-      //winston.info('broadcast update to client, cause : newPlayer');
-      //socket.broadcast.emit('update', "update");
-
       if (funct.getPlayerList().length == 2) {
         // 120000 = 2 minutes
         let dateEndGame = new Date(new Date().getTime() + 120000);
@@ -79,6 +76,9 @@ socket.on('connection', (socket) => {
         funct.setEndTime(dateEndGame);
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
         socket.emit('startGame', JSON.stringify(dateEndGame));
+      } else {
+        winston.info('Broadcast update to clients, cause : newPlayer');
+        socket.broadcast.emit('update', "update");
       }
     });
 
