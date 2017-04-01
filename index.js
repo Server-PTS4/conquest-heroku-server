@@ -69,7 +69,7 @@ socket.on('connection', (socket) => {
     socket.on('newPlayer', (message) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
-      if (funct.getPlayerList().length == 2) {
+      if (funct.getPlayerList().length >= 2) {
         // 120000 = 2 minutes
         let dateEndGame = new Date(new Date().getTime() + 120000);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
