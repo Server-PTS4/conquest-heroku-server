@@ -65,7 +65,7 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('getData', (message) => {
-      winston.info('JSON: ' + funct.getAll());
+      winston.info('JSON: ' + JSON.stringify(funct.getAll()));
     	socket.emit('getData', taloen.getData(message));
     });
 
