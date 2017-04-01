@@ -34,6 +34,7 @@ const logger = new (winston.Logger)({
 const taloen = require('./taloen/taloen');
 const funct = require('./taloen/function');
 const classe = require('./taloen/classe');
+const teamHandler = require('./team');
 
 /**
  * GameCreating
@@ -80,6 +81,29 @@ socket.on('connection', (socket) => {
         winston.info('Broadcast update to clients, cause : newPlayer');
         socket.broadcast.emit('update', "update");
       }
+    });
+
+    socket.on('changePosition', (message) => {
+        console.log(message);
+        const player = JSON.parse(JSON.stringify(message));
+        winston.info('the player '+player.username+' changer this position to lat:'+player.lat+' and long: '+player.long);
+        teamHandler.changePlayerPosition(player.username, player.lat, player.long);
+        winston.info('broadcast update to client, cause : changePosition of one player');
+        socket.broadcast.emit('update', "update");
+    });
+    socket.on('answerQuestion', (message) => {
+        const questionResult = JSON.parse(JSON.stringify(message));
+        winston.info('the player '+questionResult.username+' as answered to the question : '+questionResult.title+' and his result is '+questionResult.result);
+        teamHandler.answerToQuestion(questionResult.username, questionResult.result, questionResult.title, questionResult.spotName);
+        winston.info('broadcast update to client, cause : a player answered a question');
+        const win = classe.verifIfTeamWin();
+        if(win!="Neutral") {
+            winston.info('update', "update, cause : team "+win+" win the game!");
+            socket.broadcast.emit('gamefinish', win);
+            socket.broadcast.emit('update', "update");
+        } else {
+	    socket.broadcast.emit('update', "update");
+	}
     });
 
     socket.on('disconnect', () => {
