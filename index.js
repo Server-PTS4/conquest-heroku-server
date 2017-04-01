@@ -41,7 +41,7 @@ const classe = require('./taloen/classe');
 // Initialization
 const init = require('./initialize')
 init.newGame();
-const dateEndGame;
+let dateEndGame;
 
 /**
  * Express Route configuration
