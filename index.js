@@ -72,7 +72,10 @@ socket.on('connection', (socket) => {
       //socket.broadcast.emit('update', "update");
 
       if (funct.getPlayerList().length >= 2) {
-        socket.emit('startGame', JSON.stringify(new Date()));
+        // 1800000 = 30 minutes
+        let dateEndGame = new Date(new Date().getTime() + 1800000);
+        funct.setEndTime(dateEndGame);
+        socket.emit('startGame', JSON.stringify(dateEndGame));
       }
     });
 

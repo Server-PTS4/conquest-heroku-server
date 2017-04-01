@@ -7,13 +7,6 @@ const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
 
-var fs = require('fs');
-
-function readFile() {
-  let file = fs.readFileSync('db.json', 'utf8')
-  return JSON.stringify(JSON.parse(file));
-}
-
 function verifClass(dataClass) {
   let exist = false;
 
@@ -70,7 +63,6 @@ function transformJSON(json_data) {
     return result;
 }
 
-exports.readFile = readFile;
 exports.getValue = getValue;
 exports.verifClass = verifClass;
 exports.getValueUsed = getValueUsed;

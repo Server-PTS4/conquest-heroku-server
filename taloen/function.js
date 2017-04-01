@@ -11,6 +11,14 @@ const team = require('./../team');
 const spot = require('./../spot');
 const winston = require('winston');
 
+const fs = require('fs');
+
+function readFile() {
+  let file = fs.readFileSync('db.json', 'utf8')
+  return JSON.stringify(JSON.parse(file));
+}
+exports.readFile = readFile;
+
 // Function to verify if a team win the game
 function verifIfTeamWin() {
   let a = 0, b = 0, teamName = null;
@@ -89,6 +97,12 @@ exports.verifIfTeamWin = verifIfTeamWin
  }
  exports.addPlayer = addPlayer;
 
+ function setEndTime(date) {
+  let obj = JSON.parse(readFile());
+  obj.endTime = JSON.stringify(date);
+  fs.writeFileSync("db.json", JSON.stringify(obj, null, 2));
+ }
+exports.setEndTime = setEndTime;
 
  function answerToQuestion(playerUsername, result, title, spotTitle) {
      const teamName = playerTeamFinder(playerUsername).name;
