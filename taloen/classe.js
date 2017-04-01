@@ -18,6 +18,8 @@ function verifClass(dataClass) {
 }
 
 function getValue(dataClass, dataKey) {
+  if (typeof dataClass === 'undefined')
+    return db.value();
   if (typeof dataKey === 'undefined')
     return db.get(dataClass).value();
   return db.get(dataClass).find({ name: dataKey}).value();
