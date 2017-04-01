@@ -97,16 +97,6 @@ exports.readFile = readFile;
  }
  exports.addPlayer = addPlayer;
 
- function setEndTime(date) {
-  let obj = JSON.parse(readFile());
-  winston.info(JSON.stringify(obj));
-  obj.endTime = JSON.stringify(date);
-  winston.info("\n\n\n\n\n\n\n\n"+JSON.stringify(obj));
-  fs.writeFileSync("db.json", JSON.stringify(obj, null, 2));
-  winston.info(readFile());
- }
-exports.setEndTime = setEndTime;
-
  function answerToQuestion(playerUsername, result, title, spotTitle) {
      const teamName = playerTeamFinder(playerUsername).name;
      const team = db.get('team').find({name: teamName}).value();
