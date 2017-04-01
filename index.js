@@ -71,9 +71,10 @@ socket.on('connection', (socket) => {
       //winston.info('broadcast update to client, cause : newPlayer');
       //socket.broadcast.emit('update', "update");
 
-      if (funct.getPlayerList().length >= 2) {
+      if (funct.getPlayerList().length == 2) {
         // 1800000 = 30 minutes
         let dateEndGame = new Date(new Date().getTime() + 1800000);
+        winston.info('Sending startGame with date end game: ' + dateEndGame);
         funct.setEndTime(dateEndGame);
         socket.emit('startGame', JSON.stringify(dateEndGame));
       }
