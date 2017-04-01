@@ -61,10 +61,6 @@ socket.on('connection', (socket) => {
         }
     });
 
-    socket.on('startGame', (message) => {
-        socket.emit('startGame', new Date());
-    });
-
     socket.on('getData', (message) => {
     	socket.emit('getData', taloen.getData(message));
     });
@@ -74,6 +70,10 @@ socket.on('connection', (socket) => {
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
       //winston.info('broadcast update to client, cause : newPlayer');
       //socket.broadcast.emit('update', "update");
+
+      if (funct.getPlayerList().length >= 2) {
+        socket.emit('startGame', JSON.stringify(new Date()));
+      }
     });
 
     socket.on('disconnect', () => {

@@ -39,6 +39,9 @@ function getData(query) {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
 	}
+	if(query == "{time}") {
+		return JSON.stringify(new Date());
+	}
 
 	winston.info('LISTE :' + data);
 
