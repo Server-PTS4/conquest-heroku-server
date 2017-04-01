@@ -25,8 +25,8 @@ function addPlayer(teamName, player) {
             username: player,
             numberQuestionTried: 0,
             score : 0,
-            lat : 0,
-            long : 0
+            latitude : 0,
+            longitude : 0
         })).value();
         return teamName;
     }
@@ -35,8 +35,8 @@ function addPlayer(teamName, player) {
             username: player,
             numberQuestionTried: 0,
             score : 0,
-            lat : 0,
-            long : 0
+            latitude : 0,
+            longitude : 0
         })).value();
         return "Green";
     } else if(db.get('team').find({ name: "Red" }).value().player.length < db.get('team').find({ name: "Green" }).value().player.length) {
@@ -44,8 +44,8 @@ function addPlayer(teamName, player) {
             username: player,
             numberQuestionTried: 0,
             score : 0,
-            lat : 0,
-            long : 0
+            latitude : 0,
+            longitude : 0
         })).value();
         return "Red";
     } else {
@@ -53,8 +53,8 @@ function addPlayer(teamName, player) {
             username: player,
             numberQuestionTried: 0,
             score : 0,
-            lat : 0,
-            long : 0
+            latitude : 0,
+            longitude : 0
         })).value();
         return teamName;
     }
@@ -86,14 +86,14 @@ function changeplayercore(playerUsername, score) {
 }
 exports.changeplayercore = changeplayercore;
 
-function changePlayerPosition(playerUsername, lat, long) {
+function changePlayerPosition(playerUsername, latitude, longitude) {
     const teamName = playerTeamFinder(playerUsername).name;
     const team =  db.get('team').find({ name:teamName}).value();
     let player = _.find(team.player, function (player) {
         return player.username=playerUsername;
     });
-    player.lat = lat;
-    player.long= long;
+    player.latitude = latitude;
+    player.longitude = longitude;
     db.get('team').find({ name: teamName}).assign(team).value();
 }
 exports.changePlayerPosition = changePlayerPosition;

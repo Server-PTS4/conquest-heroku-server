@@ -94,8 +94,8 @@ socket.on('connection', (socket) => {
     socket.on('changePosition', (message) => {
         console.log(message);
         const player = JSON.parse(JSON.stringify(message));
-        winston.info('the player '+player.username+' changer this position to lat:'+player.lat+' and long: '+player.long);
-        teamHandler.changePlayerPosition(player.username, player.lat, player.long);
+        winston.info('the player '+player.username+' changer this position to lat:'+player.latitude+' and long: '+player.longitude);
+        teamHandler.changePlayerPosition(player.username, player.latitude, player.longitude);
         winston.info('broadcast update to client, cause : changePosition of one player');
         socket.broadcast.emit('update', "update");
     });
