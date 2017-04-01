@@ -77,7 +77,7 @@ socket.on('connection', (socket) => {
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
         socket.emit('startGame', JSON.stringify(dateEndGame));
       }
-      if (funct.getPlayerList().length >= 2) {
+      if (funct.getPlayerList().length > 2) {
         winston.info('Broadcast update to clients, cause : newPlayer');
         socket.broadcast.emit('update', "update");
       }
