@@ -57,6 +57,11 @@ app.get('/', function (req, res, next) {
 socket.on('connection', (socket) => {
     winston.info('A user connected');
 
+    setInterval(function() {
+      winston.info('Broadcast update to clients, cause : newPlayer');
+      socket.broadcast.emit('update', "update");        
+    }, 3000 );
+
     socket.on('isAlive', (message) => {
         if (message == "alan") {
             socket.emit('isAlive', "turing");
