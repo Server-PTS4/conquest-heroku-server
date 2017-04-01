@@ -50,16 +50,7 @@
     {
       "name": "Red",
       "color": "#c62828",
-      "player": [
-        {
-          "username": "PSddddEUDONYME",
-          "numberQuestionTried": 0,
-          "score": 0,
-          "latitude": 0,
-          "longitude": 0,
-          "team": "Red"
-        }
-      ],
+      "player": [],
       "spot": [],
       "score": 0,
       "questionTried": 0
@@ -67,15 +58,7 @@
     {
       "name": "Green",
       "color": "#43a047",
-      "player": [
-        {
-          "username": "PSdddddzEUDONYME",
-          "numberQuestionTried": 0,
-          "score": 0,
-          "latitude": 0,
-          "longitude": 0
-        }
-      ],
+      "player": [],
       "spot": [],
       "score": 0,
       "questionTried": 0

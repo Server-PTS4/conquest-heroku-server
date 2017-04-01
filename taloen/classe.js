@@ -18,18 +18,19 @@ function verifClass(dataClass) {
 }
 
 function getValue(dataClass, dataKey) {
-  if (typeof dataKey === 'undefined') {
+  if (typeof dataKey === 'undefined')
     return db.get(dataClass).value();
-  }
   return db.get(dataClass).find({ name: dataKey}).value();
 }
 
 function setValue(dataClass, dataKey, value) {
-  if (value.length == dataTitle.length) {
-    for (var i = 0; i < list.length; i++) {
+  if (value.length == dataKey.length) {
+    for (var i = 0; i < dataKey.length; i++) {
+      for(var a in value) {
       let dataChange = getValue(dataKey[i]);
       dataChange.dataKey = value[i];
       db.get(dataClass).find(getValue(dataKey)).assign(dataChange).value();
+      }
     }
   } else {
     console.log("Error : nombre of values is different between value and title");
@@ -39,28 +40,28 @@ function setValue(dataClass, dataKey, value) {
 function getValueUsed(dataClass, dataUsed, dataKey) {
   let list = [];
 
-  for(var i = 0; i < dataUsed.length; i++) {
-    if(typeof dataKey === 'undefined') {
-      _.each(db.get(dataClass).value(), function (value, key) {
-      });
-    } else {
-      console.log("Helloo else");
-      _.each(db.get(dataClass).find({ name: dataKey }).value(), function (value, key) {
-        if(key != listUsed[i]) list.push(key);
-      });
-    }
+  if(typeof dataKey === 'undefined') {
+    _.each(db.get(dataClass).value(), function (value, key) {
+      list.push(transformJSON(value, dataUsed));
+    });
+  } else {
+    _.each(db.get(dataClass).find({ name: dataKey }).value(), function (value, key) {
+      list.push(transformJSON(value, dataUsed));
+    });
   }
-  return list;
+
+  return JSON.stringify(list);
 }
 
-function transformJSON(json_data) {
+function transformJSON(value, dataUsed) {
   var result = [];
 
-  for(var i in json_data) {
-    result.push(json_data [i]);
-  }
+  for(var a in value)
+    for(var i = 0; i < dataUsed.length; i++)
+      if(a == dataUsed[i])
+        result.push(value [a]);
 
-    return result;
+  return result;
 }
 
 exports.getValue = getValue;

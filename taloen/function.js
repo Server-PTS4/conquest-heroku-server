@@ -17,7 +17,6 @@ function readFile() {
   let file = fs.readFileSync('db.json', 'utf8')
   return JSON.stringify(JSON.parse(file));
 }
-exports.readFile = readFile;
 
 // Function to verify if a team win the game
 function verifIfTeamWin() {
@@ -44,6 +43,7 @@ function getQuestionRandom() {
 
 exports.getQuestionRandom = getQuestionRandom
 exports.verifIfTeamWin = verifIfTeamWin
+exports.readFile = readFile;
 
 
 /**

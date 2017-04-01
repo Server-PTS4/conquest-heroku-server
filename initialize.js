@@ -17,6 +17,7 @@ function newGame() {
 	db.defaults({ question: [] }).value();
 	initializeTeam();
 	resetSpots();
+	endTime();
 }
 
 // Initialize team to new Game
@@ -30,9 +31,17 @@ function initializeTeam() {
 
 // Reset spots to initialize the Game
 function resetSpots() {
-    _.each(db.get('spot').value(), function (value, key) {
-        value.status="Neutral";
-    });
+  _.each(db.get('spot').value(), function (value, key) {
+    value.status="Neutral";
+  });
+}
+
+// Reset spots to initialize the Game
+function endTime() {
+	_.each(db.value(), function (value, key) {
+		if (key == 'endTime')
+    	value = "";
+  });
 }
 
 /**
