@@ -26,8 +26,9 @@ function getData(query) {
 	//It is to server timer
 	//var date = new Date();
 	//console.log(date);
-	//let list = ["player"];
-	//console.log(classe.getValueUsed(query, list));
+	//let listKey = ["player", "name"];
+	//let listValue = [["jerem", 0, 0, null], "Red"]
+	//console.log(classe.setValue(query, listKey, listValue));
 
 	winston.info('getData() called with query: ' + query);
 
@@ -37,12 +38,11 @@ function getData(query) {
 		return JSON.parse(funct.readFile()).team;
   if(query == "{spot}")
 		return spot.getSpotList();
+	if(query == "{endTime}")
+		return JSON.parse(funct.readFile()).endTime;
 	if(query == "{team spot}") {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
-	}
-	if(query == "{endTime}") {
-		return JSON.parse(funct.readFile()).endTime;
 	}
 
 	winston.info('LISTE :' + data);
