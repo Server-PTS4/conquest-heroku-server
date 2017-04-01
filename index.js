@@ -27,6 +27,7 @@ const logger = new (winston.Logger)({
     ]
 });
 
+//winston.stream({start: -1}).on('log')
 /**
  * Internal Module dependencies.
  */
@@ -69,8 +70,8 @@ socket.on('connection', (socket) => {
     socket.on('newPlayer', (message) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
-      winston.info('broadcast update to client, cause : newPlayer');
-      socket.broadcast.emit('update', "update");
+      //winston.info('broadcast update to client, cause : newPlayer');
+      //socket.broadcast.emit('update', "update");
 
       if (funct.getPlayerList().length == 2) {
         // 1800000 = 30 minutes
