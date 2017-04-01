@@ -116,6 +116,7 @@ function playerTeamFinder(playerUsername) {
     let resultForEach=null;
     _.each(db.get('team').value(), function (team) {
         const result =_.find(team.player, function (obj) {
+          console.log(obj.usermane);
             return playerUsername==obj.username;
         });
         if(result!=null)  {
