@@ -29,6 +29,8 @@ function getData(query) {
 	//let list = ["player"];
 	//console.log(classe.getValueUsed(query, list));
 
+	winston.info('getData() called with query: ' + query);
+
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);
 	if(query == "{team}")

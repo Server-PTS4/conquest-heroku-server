@@ -62,6 +62,7 @@ socket.on('connection', (socket) => {
     });
 
     socket.on('getData', (message) => {
+      winston.info('JSON: ' + JSON.stringify(funct.readFile(), null, 4));
     	socket.emit('getData', taloen.getData(message));
     });
 
