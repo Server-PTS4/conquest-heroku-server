@@ -11,11 +11,19 @@ const team = require('./../team');
 const spot = require('./../spot');
 const winston = require('winston');
 
-const fs = require('fs');
+/*const fs = require('fs');
 
 function readFile() {
   let file = fs.readFileSync('db.json', 'utf8')
   return JSON.stringify(JSON.parse(file));
+}*/
+
+function setEndTime(endTime) {
+  db.get('endTime').assign(JSON.stringify(endTime)).value();
+}
+
+function getEndTime() {
+  return db.get('endTime').value();
 }
 
 // Function to verify if a team win the game
@@ -97,6 +105,12 @@ exports.readFile = readFile;
  }
  exports.addPlayer = addPlayer;
 
+ // Getter of team list
+ function getTeamList() {
+     return db.get('team').value();
+ }
+ exports.getTeamList = getTeamList;
+
  function answerToQuestion(playerUsername, result, title, spotTitle) {
      const teamName = playerTeamFinder(playerUsername).name;
      const team = db.get('team').find({name: teamName}).value();
@@ -174,3 +188,9 @@ exports.readFile = readFile;
      return list;
  }
  exports.getPlayerList = getPlayerList;
+
+
+ function getSpotList() {
+     return db.get('spot').value();
+}
+ exports.getSpot = getSpot;

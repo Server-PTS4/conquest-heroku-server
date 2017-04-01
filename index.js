@@ -42,7 +42,6 @@ const teamHandler = require('./team');
 // Initialization
 const init = require('./initialize')
 init.newGame();
-let dateEndGame;
 
 /**
  * Express Route configuration
@@ -75,6 +74,7 @@ socket.on('connection', (socket) => {
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
       if (funct.getPlayerList().length == 2) {
         dateEndGame = new Date(new Date().getTime() + 120000);
+        funct.setEndTime(dateEndGame);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
         socket.emit('startGame', JSON.stringify(dateEndGame));
@@ -93,11 +93,9 @@ socket.on('connection', (socket) => {
 
     socket.on('changePosition', (message) => {
         console.log(message);
-        const player = JSON.parse(JSON.stringify(message));
+        const player = JSON.parse(message);
         winston.info('the player '+player.username+' changer this position to lat:'+player.latitude+' and long: '+player.longitude);
-        teamHandler.changePlayerPosition(player.username, player.latitude, player.longitude);
-        winston.info('broadcast update to client, cause : changePosition of one player');
-        socket.broadcast.emit('update', "update");
+        funct.changePlayerPosition(player.username, player.latitude, player.longitude);
     });
     socket.on('answerQuestion', (message) => {
         const questionResult = JSON.parse(JSON.stringify(message));

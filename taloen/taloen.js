@@ -35,14 +35,14 @@ function getData(query) {
 	if(query == "{team{*player}}")
 		data += team.getTeamObject(players);
 	if(query == "{team}")
-		return JSON.parse(funct.readFile()).team;
+		return funct.getTeamList();
   if(query == "{spot}")
-		return spot.getSpotList();
+		return funct.getSpotList();
 	if(query == "{endTime}")
-		return JSON.stringify(JSON.parse(funct.readFile()).endTime);
+		return funct.getEndTime();
 	if(query == "{team spot}") {
-		data += team.getTeamList() + ",";
-		data += spot.getSpotList();
+		data += funct.getTeamList() + ",";
+		data += funct.getSpotList();
 	}
 	if (query == "{question}")
 		return funct.getQuestionRandom();
