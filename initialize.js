@@ -17,7 +17,7 @@ function newGame() {
 	db.defaults({ question: [] }).value();
 	initializeTeam();
 	resetSpots();
-	//endTime();
+	endTime();
 }
 
 // Initialize team to new Game

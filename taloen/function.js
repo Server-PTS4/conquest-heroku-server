@@ -99,8 +99,11 @@ exports.readFile = readFile;
 
  function setEndTime(date) {
   let obj = JSON.parse(readFile());
+  winston.info(JSON.stringify(obj));
   obj.endTime = JSON.stringify(date);
+  winston.info("\n\n\n\n\n\n\n\n"+JSON.stringify(obj));
   fs.writeFileSync("db.json", JSON.stringify(obj, null, 2));
+  winston.info(readFile());
  }
 exports.setEndTime = setEndTime;
 
