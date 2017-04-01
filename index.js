@@ -78,6 +78,7 @@ socket.on('connection', (socket) => {
         winston.info('Sending startGame with date end game: ' + dateEndGame);
         funct.setEndTime(dateEndGame);
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
+        socket.emit('startGame', JSON.stringify(dateEndGame));
       }
     });
 
