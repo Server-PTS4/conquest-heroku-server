@@ -41,6 +41,7 @@ const classe = require('./taloen/classe');
 // Initialization
 const init = require('./initialize')
 init.newGame();
+const dateEndGame;
 
 /**
  * Express Route configuration
@@ -70,7 +71,7 @@ socket.on('connection', (socket) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
     	socket.emit('newPlayer', funct.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
       if (funct.getPlayerList().length == 2) {
-        const dateEndGame = new Date(new Date().getTime() + 120000);
+        dateEndGame = new Date(new Date().getTime() + 120000);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
         socket.emit('startGame', JSON.stringify(dateEndGame));
