@@ -39,7 +39,7 @@ function getData(query) {
   if(query == "{spot}")
 		return spot.getSpotList();
 	if(query == "{endTime}")
-		return JSON.parse(funct.readFile()).endTime;
+		return JSON.stringify(JSON.parse(funct.readFile()).endTime);
 	if(query == "{team spot}") {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
