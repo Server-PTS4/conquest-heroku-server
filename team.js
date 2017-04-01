@@ -62,7 +62,7 @@ function addPlayer(teamName, player) {
 exports.addPlayer = addPlayer;
 
 function answerToQuestion(playerUsername, result, title, spotTitle) {
-    const teamName = playerTeamFinder(playerUsername).name;
+    const teamName = playerTeamFinder(playerUsername).username;
     const team = db.get('team').find({name: teamName}).value();
     const player = playerFinder(playerUsername);
     if(result) {
@@ -78,7 +78,7 @@ exports.answerToQuestion = answerToQuestion;
 
 // Useless, Can be usefull later
 function changeplayercore(playerUsername, score) {
-    const teamName = playerTeamFinder(playerUsername).name;
+    const teamName = playerTeamFinder(playerUsername).username;
     const team =  db.get('team').find({ name: teamName}).value();
     team.score += score;
     playerFinder(playerUsername).score += score;
