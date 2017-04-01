@@ -57,11 +57,6 @@ app.get('/', function (req, res, next) {
 socket.on('connection', (socket) => {
     winston.info('A user connected');
 
-    setInterval(function() {
-      winston.info('Broadcast update to clients, cause : newPlayer');
-      socket.broadcast.emit('update', "update");        
-    }, 3000 );
-
     socket.on('isAlive', (message) => {
         if (message == "alan") {
             socket.emit('isAlive', "turing");
@@ -85,6 +80,12 @@ socket.on('connection', (socket) => {
       if (funct.getPlayerList().length > 2) {
         winston.info('Broadcast update to clients, cause : newPlayer');
         socket.broadcast.emit('update', "update");
+      }
+      if (funct.getPlayerList().length >= 2) {
+          setInterval(function() {
+            winston.info('Broadcast update to clients, cause : state change');
+            socket.broadcast.emit('update', "update");
+          }, 30000 );
       }
     });
 

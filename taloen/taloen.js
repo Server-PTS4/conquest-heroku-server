@@ -44,9 +44,15 @@ function getData(query) {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
 	}
-	if (query == "{question}") {
+	if (query == "{question}")
 		return funct.getQuestionRandom();
-	}
+	if(query == '{spot:"Dormerie"{state}}')
+		return statement(2);
+	if(query == '{spot:"Parking"{state}}')
+		return statement(1);
+	if(query == '{spot:"Département Informatique"{state}}')
+		return statement(0);
+
 
 	winston.info('LISTE :' + data);
 
@@ -58,6 +64,19 @@ function getData(query) {
 	//	data = "error";
 	//}
 	return data;
+}
+
+function statement(index) {
+	var value = classe.getValue('team')
+	for (var i in value) {
+		if (i == 0) {
+			var spotValue = value[i].spot;
+			for (var a in spotValue) {
+				if (a == index)
+				 return spotValue[a].state;
+			}
+		}
+	}
 }
 
 exports.getData = getData;

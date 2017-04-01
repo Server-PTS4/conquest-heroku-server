@@ -11,42 +11,21 @@
           "latitude": 48.086012,
           "longitude": -0.759521,
           "radius": 15,
-          "statement": true
+          "state": true
         },
         {
           "name": "Parking",
           "latitude": 48.085445810389906,
           "longitude": -0.7593280076980591,
           "radius": 15,
-          "statement": true
+          "state": true
         },
         {
           "name": "Dormerie",
           "latitude": 48.084962,
           "longitude": -0.759738,
           "radius": 15,
-          "statement": true
-        },
-        {
-          "name": "Bibliothèque Universitaire",
-          "latitude": 48.084962,
-          "longitude": -0.759738,
-          "radius": 15,
-          "statement": true
-        },
-        {
-          "name": "Département Génie Biologique",
-          "latitude": 48.084962,
-          "longitude": -0.759738,
-          "radius": 15,
-          "statement": true
-        },
-        {
-          "name": "Restaurant Universitaire",
-          "latitude": 48.084962,
-          "longitude": -0.759738,
-          "radius": 15,
-          "statement": true
+          "state": false
         }
       ],
       "score": 0,
