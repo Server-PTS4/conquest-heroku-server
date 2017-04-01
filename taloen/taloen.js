@@ -44,6 +44,9 @@ function getData(query) {
 		data += team.getTeamList() + ",";
 		data += spot.getSpotList();
 	}
+	if (query == "{question}") {
+		return funct.getQuestionRandom();
+	}
 
 	winston.info('LISTE :' + data);
 

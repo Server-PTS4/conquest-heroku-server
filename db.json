@@ -115,62 +115,62 @@
     {
       "name": "Eau",
       "questionType": "MCQ",
-      "questions": [
-        "Quelle est la couleur de l'eau ?",
+      "question": "Quelle est la couleur de l'eau ?",
+      "possibilities": [
         "Bleue",
         "Transparente",
         "Blanche",
         "Turquoise"
       ],
-      "answer": "Transparent"
+      "answer": 2
     },
     {
       "name": "Fruit",
       "questionType": "MCQ",
-      "questions": [
-        "Quel fruit produit le chêne ?",
+      "question": "Quel fruit produit le chêne ?",
+      "possibilities": [
         "Une Chataigne",
         "Une Bogue",
         "Un Gland",
         "Une Pomme de Pin"
       ],
-      "answer": "Gland"
+      "answer": 3
     },
     {
       "name": "Insecte",
       "questionType": "MCQ",
-      "questions": [
-        "Quel insecte permet de produire du miel ?",
+      "question": "Quel insecte permet de produire du miel ?",
+      "possibilities" : [
         "L'ours",
         "L'abeille",
         "Le chêne",
         "La guèpe"
       ],
-      "answer": "L'abeille"
+      "answer": 2
     },
     {
       "name": "Echologia",
       "questionType": "MCQ",
-      "questions": [
-        "Dans quelle ville se situe Echologia ?",
+      "question": "Dans quelle ville se situe Echologia ?",
+      "possibilities": [
         "Paris",
         "Louverné",
         "Laval",
         "Moscou"
       ],
-      "answer": "Louverné"
+      "answer": 2
     },
     {
       "name": "pts3",
       "questionType": "MCQ",
-      "questions": [
-        "Quelle est la salle où nous sommes?",
+      "question": "Quelle est la salle où nous sommes?",
+      "possibilities": [
         "TDM1",
         "TDM2",
         "TDM3",
         "TDM4"
       ],
-      "answer": "TDM2"
+      "answer": 2
     }
   ]
 }
