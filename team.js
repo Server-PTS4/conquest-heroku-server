@@ -87,7 +87,7 @@ function changeplayercore(playerUsername, score) {
 exports.changeplayercore = changeplayercore;
 
 function changePlayerPosition(playerUsername, latitude, longitude) {
-    const teamName = playerTeamFinder(playerUsername).name;
+    const teamName = playerTeamFinder(playerUsername).username;
     const team =  db.get('team').find({ name:teamName}).value();
     let player = _.find(team.player, function (player) {
         return player.username=playerUsername;
