@@ -16,15 +16,19 @@ const winston = require('winston');
 function readFile() {
   let file = fs.readFileSync('db.json', 'utf8')
   return JSON.stringify(JSON.parse(file));
-}*/
+}
+exports.readFile = readFile;
+*/
 
 function setEndTime(endTime) {
   db.get('endTime').assign(JSON.stringify(endTime)).value();
 }
+exports.setEndTime = setEndTime;
 
 function getEndTime() {
   return db.get('endTime').value();
 }
+exports.getEndTime = getEndTime;
 
 // Function to verify if a team win the game
 function verifIfTeamWin() {
@@ -51,7 +55,6 @@ function getQuestionRandom() {
 
 exports.getQuestionRandom = getQuestionRandom
 exports.verifIfTeamWin = verifIfTeamWin
-exports.readFile = readFile;
 
 
 /**
@@ -193,4 +196,4 @@ exports.readFile = readFile;
  function getSpotList() {
      return db.get('spot').value();
 }
- exports.getSpot = getSpot;
+ exports.getSpotList = getSpotList;
