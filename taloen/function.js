@@ -158,6 +158,22 @@ exports.verifIfTeamWin = verifIfTeamWin
  }
  exports.changePlayerPosition = changePlayerPosition;
 
+ function answerToQuestion(playerUsername, result, title, spotTitle) {
+     const teamName = playerTeamFinder(playerUsername).username;
+     const team = db.get('team').find({name: teamName}).value();
+     const player = playerFinder(playerUsername);
+     if(result) {
+       // TODO Block spot for 1 minute
+         team.score += 1;
+         player.score += 1;
+     }
+     team.numberQuestionTried += 1;
+     player.numberQuestionTried += 1;
+     db.get('team').find({name: teamName}).assign(team).value();
+     spots.spotChangeStatus(spotTitle,team.name)
+ }
+ exports.answerToQuestion = answerToQuestion;
+
  function playerFinder(playerUsername) {
      let resultForEach=null;
      _.each(db.get('team').value(), function (team) {

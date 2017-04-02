@@ -99,17 +99,15 @@ socket.on('connection', (socket) => {
     });
     socket.on('answerQuestion', (message) => {
         const questionResult = JSON.parse(JSON.stringify(message));
-        winston.info('the player '+questionResult.username+' as answered to the question : '+questionResult.title+' and his result is '+questionResult.result);
-        teamHandler.answerToQuestion(questionResult.username, questionResult.result, questionResult.title, questionResult.spotName);
+        winston.info('the player '+questionResult.username+' as answered to the question : '+questionResult.title+'at spot name: ' + questionResult.spotname + ' and his result is '+questionResult.result);
+        funct.answerToQuestion(questionResult.username, questionResult.result, questionResult.title, questionResult.spotName);
         winston.info('broadcast update to client, cause : a player answered a question');
-        const win = classe.verifIfTeamWin();
+        const winnerTeam = funct.verifIfTeamWin();
         if(win!="Neutral") {
-            winston.info('update', "update, cause : team "+win+" win the game!");
-            socket.broadcast.emit('gamefinish', win);
-            socket.broadcast.emit('update', "update");
-        } else {
+            winston.info('update', "update, cause : team "+ winnerTeam +" won the game!");
+            socket.broadcast.emit('gamefinish', winnerTeam);
+        }
 	    socket.broadcast.emit('update', "update");
-	}
     });
 
     socket.on('disconnect', () => {
