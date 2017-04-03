@@ -1,6 +1,6 @@
 {
   "lang": "fr",
-  "endTime": [],
+  "endTime": "\"2017-04-03T14:19:17.580Z\"",
   "team": [
     {
       "name": "Neutral",
@@ -26,7 +26,7 @@
           "latitude": 48.084962,
           "longitude": -0.759738,
           "radius": 15,
-          "state": false
+          "state": true
         }
       ],
       "score": 0,
@@ -35,7 +35,16 @@
     {
       "name": "Red",
       "color": "#c62828",
-      "player": [],
+      "player": [
+        {
+          "username": "PSEUDONYME",
+          "numberQuestionTried": 0,
+          "score": 0,
+          "latitude": 0,
+          "longitude": 0,
+          "team": "Red"
+        }
+      ],
       "spot": [],
       "score": 0,
       "questionTried": 0
@@ -43,7 +52,16 @@
     {
       "name": "Green",
       "color": "#43a047",
-      "player": [],
+      "player": [
+        {
+          "username": "PSEUDONsYME",
+          "numberQuestionTried": 0,
+          "score": 0,
+          "latitude": 0,
+          "longitude": 0,
+          "team": "Green"
+        }
+      ],
       "spot": [],
       "score": 0,
       "questionTried": 0
@@ -126,7 +144,7 @@
       "name": "Insecte",
       "questionType": "MCQ",
       "question": "Quel insecte permet de produire du miel ?",
-      "possibilities" : [
+      "possibilities": [
         "L'ours",
         "L'abeille",
         "Le chêne",

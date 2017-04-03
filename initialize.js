@@ -13,11 +13,11 @@ const db = low('db.json', { storage: fileSync });
 
 // Create a new Game
 function newGame() {
+	db.defaults({ endTime: "" }).value();
 	db.defaults({ team: [] }).value();
 	db.defaults({ question: [] }).value();
 	initializeTeam();
 	resetSpots();
-	endTime();
 }
 
 // Initialize team to new Game

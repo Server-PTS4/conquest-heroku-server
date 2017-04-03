@@ -26,14 +26,12 @@ function getAll() {
 exports.getAll = getAll;
 
 function setEndTime(endTime) {
-  db.get('endTime').assign(db.get('endTime').value().push({ endTime : JSON.stringify(endTime) })).value();
-  winston.info('SET END TIME TO : ' + getEndTime());
+  db.assign({ endTime : JSON.stringify(endTime) });
 }
 exports.setEndTime = setEndTime;
 
 function getEndTime() {
-  let endTimeString = "" + JSON.stringify(db.get('endTime').value());
-  return JSON.parse(endTimeString.substring(1, endTimeString.length - 1)).endTime;
+  return db.get('endTime');
 }
 exports.getEndTime = getEndTime;
 
