@@ -1,6 +1,6 @@
 {
   "lang": "fr",
-  "endTime": "\"2017-04-03T14:19:17.580Z\"",
+  "endTime": "",
   "team": [
     {
       "name": "Neutral",
@@ -35,16 +35,7 @@
     {
       "name": "Red",
       "color": "#c62828",
-      "player": [
-        {
-          "username": "PSEUDONYME",
-          "numberQuestionTried": 0,
-          "score": 0,
-          "latitude": 0,
-          "longitude": 0,
-          "team": "Red"
-        }
-      ],
+      "player": [],
       "spot": [],
       "score": 0,
       "questionTried": 0
@@ -52,16 +43,7 @@
     {
       "name": "Green",
       "color": "#43a047",
-      "player": [
-        {
-          "username": "PSEUDONsYME",
-          "numberQuestionTried": 0,
-          "score": 0,
-          "latitude": 0,
-          "longitude": 0,
-          "team": "Green"
-        }
-      ],
+      "player": [],
       "spot": [],
       "score": 0,
       "questionTried": 0
