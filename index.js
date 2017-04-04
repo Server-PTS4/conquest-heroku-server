@@ -70,14 +70,14 @@ socket.on('connection', (socket) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
     	socket.emit('newPlayer', classe.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam), socket.request.connection.remoteAddress);
 
-      if (classe.getPlayerList().length == 2) {
+      if (classe.getPlayerList().length == 2 && classe.getValue('endTime') == "") {
         dateEndGame = new Date(new Date().getTime() + 240000);
 
         classe.setEndTime(dateEndGame);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
 
-        socket.broadcast.emit('startGame', JSON.stringify(new Date()) + JSON.stringify(dateEndGame));
-        socket.emit('startGame', JSON.stringify(new Date()) + JSON.stringify(dateEndGame));
+        socket.broadcast.emit('startGame', JSON.stringify(new Date()) + classe.getValue('endTime'));
+        socket.emit('startGame', JSON.stringify(new Date()) + classe.getValue('endTime'));
       }
 
       if (classe.getPlayerList().length > 2) {
