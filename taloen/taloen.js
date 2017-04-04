@@ -32,7 +32,7 @@ function getData(query) {
 	if(query == "{team{*player}}")
 		data += classe.getValueUsed('team', ['player'], false);
 	if(query == "{team}")
-		return JSON.stringify(classe.getValue('team'));
+		return classe.getValue('team');
   if(query == "{spot}")
 		return classe.getValueUsed('team', ['spot'], true);
 	if(query == "{endTime}")
