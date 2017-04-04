@@ -147,6 +147,11 @@ exports.verifIfTeamWin = verifIfTeamWin;
  }
  exports.setEndTime = setEndTime;
 
+
+function playerExists(player) {
+    console.log(getPlayerList());
+    return true;
+}
  /**
   * Add player
   */
@@ -161,7 +166,8 @@ exports.verifIfTeamWin = verifIfTeamWin;
               numberQuestionTried: 0,
               score : 0,
               latitude : 0,
-              longitude : 0
+              longitude : 0,
+              ip: socket.request.connection.remoteAddress
           })).value();
           return true;
       }
@@ -171,7 +177,8 @@ exports.verifIfTeamWin = verifIfTeamWin;
               numberQuestionTried: 0,
               score : 0,
               latitude : 0,
-              longitude : 0
+              longitude : 0,
+              ip: socket.request.connection.remoteAddress
           })).value();
           return true;
       } else if(db.get('team').find({ name: "Red" }).value().player.length < db.get('team').find({ name: "Green" }).value().player.length) {
@@ -180,7 +187,8 @@ exports.verifIfTeamWin = verifIfTeamWin;
               numberQuestionTried: 0,
               score : 0,
               latitude : 0,
-              longitude : 0
+              longitude : 0,
+              ip: socket.request.connection.remoteAddress
           })).value();
           return true;
       } else {
@@ -189,7 +197,8 @@ exports.verifIfTeamWin = verifIfTeamWin;
               numberQuestionTried: 0,
               score : 0,
               latitude : 0,
-              longitude : 0
+              longitude : 0,
+              ip: socket.request.connection.remoteAddress
           })).value();
           return true;
       }

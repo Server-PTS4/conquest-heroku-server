@@ -30,6 +30,7 @@
         }
       ],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -38,6 +39,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -46,6 +48,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -54,6 +57,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -62,6 +66,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -70,6 +75,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -78,6 +84,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -86,6 +93,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     },
     {
@@ -94,6 +102,7 @@
       "player": [],
       "spot": [],
       "score": 0,
+      "numberQuestionTried": 0,
       "questionTried": 0
     }
   ],

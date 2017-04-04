@@ -80,7 +80,7 @@ socket.on('connection', (socket) => {
         classe.setEndTime(dateEndGame);
         winston.info('Sending startGame with date end game: ' + dateEndGame);
 
-        socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
+        socket.broadcast.emit('startGame', JSON.stringify(new Date()) + JSON.stringify(dateEndGame));
         socket.emit('startGame', JSON.stringify(new Date()) + JSON.stringify(dateEndGame));
       }
 

@@ -36,7 +36,7 @@ function getData(query) {
   if(query == "{spot}")
 		return classe.getValueUsed('team', ['spot'], true);
 	if(query == "{endTime}")
-		return classe.getValue('endTime');
+		return JSON.stringify(new Date()) + classe.getValue('endTime');
 	if (query == "{question}")
 		return classe.getQuestionRandom();
 	if(query == '{spot:"Dormerie"{state}}')
