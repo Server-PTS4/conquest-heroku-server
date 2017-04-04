@@ -26,7 +26,7 @@ function initializeTeam() {
 	_.each(db.get('team').value(), function (value, key) {
 			value.player = [];
 			value.score = 0;
-			value.questionTried = 0;
+			value.numberQuestionTried = 0;
 	});
 }
 

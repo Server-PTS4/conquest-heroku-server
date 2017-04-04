@@ -30,8 +30,7 @@
         }
       ],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Red",
@@ -39,8 +38,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Green",
@@ -48,8 +46,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Purple",
@@ -57,8 +54,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "White",
@@ -66,8 +62,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Black",
@@ -75,8 +70,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Blue",
@@ -84,8 +78,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Pink",
@@ -93,8 +86,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     },
     {
       "name": "Yellow",
@@ -102,8 +94,7 @@
       "player": [],
       "spot": [],
       "score": 0,
-      "numberQuestionTried": 0,
-      "questionTried": 0
+      "numberQuestionTried": 0
     }
   ],
   "question": [
