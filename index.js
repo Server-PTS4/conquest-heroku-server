@@ -52,13 +52,6 @@ app.get('/', function (req, res, next) {
  * Socket.io configuration
  */
 socket.on('connection', (socket) => {
-  socket.on('essaiCompression', (message) => {
-    console.log(message);
-    socket.emit('essaiCompression', message);
-  });
-
-
-
     winston.info('A user connected');
 
     // Socket to verif connexion
@@ -85,18 +78,12 @@ socket.on('connection', (socket) => {
 
         socket.broadcast.emit('startGame', JSON.stringify(new Date()) + classe.getValue('endTime'));
         socket.emit('startGame', JSON.stringify(new Date()) + classe.getValue('endTime'));
-      }
 
-      if (classe.getPlayerList().length > 2) {
-        winston.info('Broadcast update to clients, cause : newPlayer');
-        socket.broadcast.emit('update', "update");
-      }
-
-      if (classe.getPlayerList().length >= 2) {
         setInterval(function() {
           winston.info('Broadcast update to clients, cause : state change');
+          socket.emit('update', "update");
           socket.broadcast.emit('update', "update");
-        }, 30000 );
+        }, 3000, 3000 );
       }
     });
 

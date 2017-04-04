@@ -148,14 +148,18 @@ exports.verifIfTeamWin = verifIfTeamWin;
  exports.setEndTime = setEndTime;
 
 
-function playerExists(player) {
-    console.log(getPlayerList());
-    return true;
+function playerExists(player, ipAddress) {
+    for (var a in getPlayerList()) {
+      console.log("/" + a);
+    }
+    return false;
 }
  /**
   * Add player
   */
   function addPlayer(player, teamName, ipAddress) {
+      if (playerExists(player, ipAddress)) return true;
+
       if(playerFinder(player)!=null) {
           winston.error("A Player have tried to choose an username that is already in database!");
           return false;
