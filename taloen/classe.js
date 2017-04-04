@@ -267,7 +267,6 @@ exports.verifIfTeamWin = verifIfTeamWin;
 
       _.each(db.get('team').value(),function (team) {
           _.each(team.player, function (player) {
-              player.team= team.name;
               list.push(player);
           })
       });
