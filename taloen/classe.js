@@ -149,10 +149,24 @@ exports.verifIfTeamWin = verifIfTeamWin;
 
 
 function playerExists(player, ipAddress) {
-    for (var a in getPlayerList()) {
-      console.log("/" + a);
+  let dataA = getValue('team');
+  for (var a in dataA) {
+    let dataB = dataA[a];
+    for (var b in dataB) {
+      if (b == 'player') {
+        let dataC = dataB[b];
+        for (var c in dataC) {
+          let dataD = dataC[c];
+          for (var d in dataD) {
+            if (dataD[d] == ipAddress) {
+              return true;
+            }
+          }
+        }
+      }
     }
-    return false;
+  }
+  return false;
 }
  /**
   * Add player
