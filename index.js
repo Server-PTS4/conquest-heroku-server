@@ -81,7 +81,7 @@ socket.on('connection', (socket) => {
         winston.info('Sending startGame with date end game: ' + dateEndGame);
 
         socket.broadcast.emit('startGame', JSON.stringify(dateEndGame));
-        socket.emit('startGame', JSON.stringify(dateEndGame));
+        socket.emit('startGame', JSON.stringify(new Date()) + JSON.stringify(dateEndGame));
       }
 
       if (classe.getPlayerList().length > 2) {
