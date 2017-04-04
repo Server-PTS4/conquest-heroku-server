@@ -52,6 +52,13 @@ app.get('/', function (req, res, next) {
  * Socket.io configuration
  */
 socket.on('connection', (socket) => {
+  socket.on('essaiCompression', (message) => {
+    console.log(message);
+    socket.emit('essaiCompression', message);
+  });
+
+
+
     winston.info('A user connected');
 
     // Socket to verif connexion
@@ -68,7 +75,7 @@ socket.on('connection', (socket) => {
     // Socket to add a new Player in
     socket.on('newPlayer', (message) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
-    	socket.emit('newPlayer', classe.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam), socket.request.connection.remoteAddress);
+    	socket.emit('newPlayer', classe.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam, socket.request.connection.remoteAddress));
 
       if (classe.getPlayerList().length == 2 && classe.getValue('endTime') == "") {
         dateEndGame = new Date(new Date().getTime() + 240000);
