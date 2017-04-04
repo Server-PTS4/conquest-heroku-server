@@ -16,9 +16,6 @@ const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
 
 const classe = require('./classe');
-const team = require('./../team');
-const spot = require('./../spot');
-const funct = require('./function');
 
 function getData(query) {
 	let data = "";
@@ -30,31 +27,30 @@ function getData(query) {
 	//let listValue = [["jerem", 0, 0, null], "Red"]
 	//console.log(classe.setValue(query, listKey, listValue));
 
-	winston.info('getData() called with query: ' + query);
+	winston.info('Function getData() called with query: ' + query);
 
 	if(query == "{team{*player}}")
-		data += team.getTeamObject(players);
+		data += classe.getValueUsed('team', ['player'], false);
 	if(query == "{team}")
-		return funct.getTeamList();
+		return JSON.stringify(classe.getValue('team'));
   if(query == "{spot}")
-		return funct.getSpotList();
+		return classe.getValueUsed('team', ['spot'], true);
 	if(query == "{endTime}")
-		return funct.getEndTime();
-	if(query == "{team spot}") {
-		data += funct.getTeamList() + ",";
-		data += funct.getSpotList();
-	}
+		return classe.getValue('endTime');
 	if (query == "{question}")
-		return funct.getQuestionRandom();
+		return classe.getQuestionRandom();
 	if(query == '{spot:"Dormerie"{state}}')
-		return statement(2);
+		data += classe.statement(2);
 	if(query == '{spot:"Parking"{state}}')
-		return statement(1);
+		data += classe.statement(1);
 	if(query == '{spot:"Département Informatique"{state}}')
-		return statement(0);
+		data += classe.statement(0);
+	if(query == "{team spot}") {
+		data += JSON.stringify(classe.getValue('team')) + ",";
+		data += JSON.stringify(classe.getValueUsed('team', ['spot'], true));
+	}
 
-
-	winston.info('LISTE :' + data);
+	winston.info('LISTE :' + JSON.stringify(data));
 
 	//query = stringifyQuery(query);
 
@@ -64,19 +60,6 @@ function getData(query) {
 	//	data = "error";
 	//}
 	return data;
-}
-
-function statement(index) {
-	var value = classe.getValue('team')
-	for (var i in value) {
-		if (i == 0) {
-			var spotValue = value[i].spot;
-			for (var a in spotValue) {
-				if (a == index)
-				 return spotValue[a].state;
-			}
-		}
-	}
 }
 
 exports.getData = getData;
