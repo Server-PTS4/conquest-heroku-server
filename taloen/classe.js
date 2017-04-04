@@ -6,6 +6,8 @@ const _ = require('lodash');
 const low = require('lowdb');
 const fileSync = require('lowdb/lib/file-sync');
 const db = low('db.json', { storage: fileSync });
+// Print console
+const winston = require('winston');
 
 function verifClass(dataClass) {
   let exist = false;
@@ -141,7 +143,7 @@ exports.verifIfTeamWin = verifIfTeamWin;
  exports.spotChangeStatus = spotChangeStatus;
 
  function setEndTime(endTime) {
-   db.assign({ endTime : JSON.stringify(endTime) });
+   db.assign({ endTime : JSON.stringify(endTime) }).value();
  }
  exports.setEndTime = setEndTime;
 

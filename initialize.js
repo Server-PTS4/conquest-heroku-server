@@ -13,12 +13,12 @@ const db = low('db.json', { storage: fileSync });
 
 // Create a new Game
 function newGame() {
-	db.defaults({ endTime: "" }).value();
 	db.defaults({ team: [] }).value();
 	db.defaults({ question: [] }).value();
-	
+
 	initializeTeam();
 	resetSpots();
+	resetTime();
 }
 
 // Initialize team to new Game
@@ -35,6 +35,10 @@ function resetSpots() {
   _.each(db.get('spot').value(), function (value, key) {
     value.status="Neutral";
   });
+}
+
+function resetTime() {
+	db.assign({ endTime : "" }).value();
 }
 
 /**
