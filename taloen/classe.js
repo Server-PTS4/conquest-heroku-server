@@ -155,7 +155,7 @@ function playerExists(player) {
  /**
   * Add player
   */
-  function addPlayer(player, teamName) {
+  function addPlayer(player, teamName, ipAddress) {
       if(playerFinder(player)!=null) {
           winston.error("A Player have tried to choose an username that is already in database!");
           return false;
@@ -167,7 +167,7 @@ function playerExists(player) {
               score : 0,
               latitude : 0,
               longitude : 0,
-              ip: socket.request.connection.remoteAddress
+              ip: ipAddress
           })).value();
           return true;
       }
@@ -178,7 +178,7 @@ function playerExists(player) {
               score : 0,
               latitude : 0,
               longitude : 0,
-              ip: socket.request.connection.remoteAddress
+              ip: ipAddress
           })).value();
           return true;
       } else if(db.get('team').find({ name: "Red" }).value().player.length < db.get('team').find({ name: "Green" }).value().player.length) {
@@ -188,7 +188,7 @@ function playerExists(player) {
               score : 0,
               latitude : 0,
               longitude : 0,
-              ip: socket.request.connection.remoteAddress
+              ip: ipAddress
           })).value();
           return true;
       } else {
@@ -198,7 +198,7 @@ function playerExists(player) {
               score : 0,
               latitude : 0,
               longitude : 0,
-              ip: socket.request.connection.remoteAddress
+              ip: ipAddress
           })).value();
           return true;
       }

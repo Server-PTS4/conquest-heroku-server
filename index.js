@@ -54,10 +54,6 @@ app.get('/', function (req, res, next) {
 socket.on('connection', (socket) => {
     winston.info('A user connected');
 
-    // Client IP addresse
-    var clientIp = socket.request.connection.remoteAddress;
-    console.log(clientIp);
-
     // Socket to verif connexion
     socket.on('isAlive', (message) => {
       if (message == "alan") socket.emit('isAlive', "turing");
@@ -72,7 +68,7 @@ socket.on('connection', (socket) => {
     // Socket to add a new Player in
     socket.on('newPlayer', (message) => {
       winston.info("New player with username: '" + JSON.parse(message).username + "' and preferedTeam: '" + JSON.parse(message).preferedTeam + "'");
-    	socket.emit('newPlayer', classe.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam));
+    	socket.emit('newPlayer', classe.addPlayer(JSON.parse(message).username, JSON.parse(message).preferedTeam), socket.request.connection.remoteAddress);
 
       if (classe.getPlayerList().length == 2) {
         dateEndGame = new Date(new Date().getTime() + 240000);
