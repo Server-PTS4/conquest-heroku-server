@@ -1,29 +1,15 @@
 /**
- * TalOen is a self created API designed like GraphQL API used to get data quickly and easily
- */
-
-/**
  * External Module dependencies.
  */
+// Print console
 const winston = require('winston');
 
-function getData(query) {
-	let data = "";
-
-	query = '{ test Spot: "Dormerie" { latitude longitude } essai Player {name} hello { world { alan turing amd ryzen { intel egal merde } } } try}';
-
-	query = stringifyQuery(query);
-
-	if (isSyntaxCorrect(query)) {
+function verifSyntax(query) {
+    if (isSyntaxCorrect(query)) {
 		let queryArguments = getArguments(query);
 		// Parse arguments
 		parseArgument(queryArguments);
 	}
-
-	if (data == "") {
-		data = "error";
-	}
-	return data;
 }
 
 function stringifyQuery(query) {
@@ -52,7 +38,7 @@ function isSyntaxCorrect(query) {
 		if (query.charAt(query.length - 1) == '}') {
 			let nbBracketsOpened = 0;
 			let nbQuotesOpened = 0;
-			let placeOfFirstQuoteBadSyntax = 0;
+      let placeQuote = 0;
 
 			for (let i = 0; i < query.length; i++) {
 				switch (query.charAt(i)) {
@@ -68,9 +54,11 @@ function isSyntaxCorrect(query) {
 						} else {
 							nbQuotesOpened--;
 						}
-						
-						if (query.charAt(i - 1) != ':' && nbQuotesOpened < 0 && placeOfFirstQuoteBadSyntax == 0) {
-							placeOfFirstQuoteBadSyntax = i;							
+            placeQuote++;
+
+						if (query.charAt(i - 1) != ':' && nbQuotesOpened < 0) {
+      				winston.error('Syntax error on query:\n' + query + '\nExpected : before "' + query.split('"')[placeQuote] + '"');
+              return false;
 						}
 						break;
 				}
@@ -79,11 +67,6 @@ function isSyntaxCorrect(query) {
 			if (nbQuotesOpened != 0) {
 				winston.error('Syntax error on query:\n' + query + '\nNot all the quotes are closed starting at: ' + query.substring(query.indexOf('"'), query.length));
 				return false;
-			} else {
-				// TODO indexOf => probleme, il ne renvoie pas la bonne place
-				winston.error('Syntax error on query:\n' + query + '\nExpected ":" before: "' + query.substring(placeOfFirstQuoteBadSyntax + 1, query.length)
-								.substring(0, query.indexOf('"')));
-							return false;
 			}
 
 			for (let i = 0; i < query.length; i++) {
@@ -91,7 +74,7 @@ function isSyntaxCorrect(query) {
 					// TODO
 					if (nbBracketsOpened > 0) {
 						expectedChar = '}';
-						foundChar = '';	
+						foundChar = '';
 						winston.error('Syntax error on query:\n' + query + '\nExpected ' + expectedChar + ' found ' + foundChar + ' instead');
 						return false;
 					} else {
@@ -160,7 +143,7 @@ function parseArgument(args) {
 		if (doArgumentExists(args[i])) {
 
 		}
-	}	
+	}
 }
 
 function doArgumentExists(argument) {
@@ -171,4 +154,5 @@ function searchFor(object, id) {
 
 }
 
-exports.getData = getData;
+exports.stringifyQuery = stringifyQuery;
+exports.verifSyntax = verifSyntax;
