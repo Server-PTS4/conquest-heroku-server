@@ -149,6 +149,7 @@ exports.verifIfTeamWin = verifIfTeamWin;
 
 
 function playerExists(player, ipAddress) {
+  let dat = "";
   let dataA = getValue('team');
   for (var a in dataA) {
     let dataB = dataA[a];
@@ -158,9 +159,8 @@ function playerExists(player, ipAddress) {
         for (var c in dataC) {
           let dataD = dataC[c];
           for (var d in dataD) {
-            if (dataD[d] == ipAddress) {
-              return true;
-            }
+            if (dataD[d] == player) dat = player;
+            if (dataD[d] == ipAddress && dat == player) return true;
           }
         }
       }
